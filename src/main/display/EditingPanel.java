@@ -7,9 +7,15 @@ import javax.swing.*;
  */
 public class EditingPanel extends JPanel{
 
+    JPanel selectionPanel;
+    JPanel editingPanel;
+
 
     public EditingPanel(){
         super();
+
+
+
     }
 
 }

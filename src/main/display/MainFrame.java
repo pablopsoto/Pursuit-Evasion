@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
         JPanel p = new JPanel();
         p.setBackground(Color.BLACK);
 
-        p.setLayout(new BoxLayout(p, BoxLayout.LINE_AXIS));
+        p.setLayout(new GridLayout(1,2));
 
         JButton runButton = new JButton("Run Environment");
         runButton.addActionListener(e -> {
@@ -38,16 +38,11 @@ public class MainFrame extends JFrame {
             //TODO: this button should open the EditingPanel
         });
 
-        JPanel bPanel = new JPanel();
-        bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.LINE_AXIS));
-        bPanel.setBackground(Color.BLACK);
-        bPanel.add(runButton);
-        bPanel.add(editButton);
+
+        p.add(runButton);
+        p.add(editButton);
 
 
-        p.add(blackPanel());
-        p.add(bPanel);
-        p.add(blackPanel());
 
         return p;
     }
