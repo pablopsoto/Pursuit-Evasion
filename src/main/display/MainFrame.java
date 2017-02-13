@@ -3,48 +3,27 @@ package main.display;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+/**
+ * Created by jeroen on 2/8/17.
+ */
+public class MainFrame extends JFrame
+{
 
+    private JPanel selectPanel;
 
+    public MainFrame()
+    {
+        //create game elements and set up panels
+        selectPanel = new SelectPanel(this);
 
-    public MainFrame(){
-        super("Main Frame");
-
-        this.setSize(new Dimension(800, 600));
-        this.add(mainPanel());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+        //set main gui settings
+        setTitle("Persue the dream!");
+        setLayout(new BorderLayout());
+        getContentPane().add(selectPanel, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    private JPanel mainPanel(){
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.BLACK);
-
-        p.setLayout(new GridLayout(8,2));
-
-        JButton runButton = new JButton("Run Environment");
-        runButton.addActionListener(e -> {
-            System.out.println("Clicked Running Button");
-            //TODO: This button should open the recently edited environment or a default environment
-        });
-        runButton.setEnabled(false);
-
-        JButton editButton = new JButton("Edit the Environment");
-        editButton.addActionListener(e -> {
-            System.out.println("Clicked Editing Button");
-            runButton.setEnabled(true);
-
-            //TODO: this button should open the EditingPanel
-        });
-
-
-        p.add(runButton);
-        p.add(editButton);
-
-
-
-        return p;
-    }
-
 }
