@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
         JPanel p = new JPanel();
         p.setBackground(Color.BLACK);
 
-        p.setLayout(new GridLayout(1,2));
+        p.setLayout(new GridLayout(8,2));
 
         JButton runButton = new JButton("Run Environment");
         runButton.addActionListener(e -> {
@@ -44,12 +44,6 @@ public class MainFrame extends JFrame {
 
 
 
-        return p;
-    }
-
-    JPanel blackPanel(){
-        JPanel p =new JPanel();
-        p.setBackground(Color.BLACK);
         return p;
     }
 
