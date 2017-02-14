@@ -13,11 +13,14 @@ import static main.game.board.SquareState.*;
  */
 public class DrawPanel
 {
-    private static int scale = 50;
-    private static int borderSize = 20;
+    private int scale = 50;
+    private int borderSize = 20;
+    private int panelWidth;
+    private int panelHeight;
+
     public DrawPanel(int width, int height){
-
-
+        panelWidth = width;
+        panelHeight =  height;
     }
 
     public void draw(Graphics g)
@@ -25,6 +28,8 @@ public class DrawPanel
         Board board = new Board(10, 10);
         System.out.println("BoardWidth = " + board.getWidth());
         System.out.println("BoardHeight = " + board.getHeight());
+        scale = (panelWidth*panelHeight/2 -2*borderSize)/(board.getWidth()*board.getHeight()/2);
+        System.out.println("Scale = " +scale);
         g.setColor(Color.black);
         g.fillRect(0,0,board.getWidth()*scale+borderSize*2,board.getHeight()*scale+borderSize*2);
         for (int i = 0; i < board.getWidth(); i++)
