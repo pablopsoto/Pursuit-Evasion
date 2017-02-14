@@ -21,7 +21,7 @@ public class GameFrame extends JFrame {
     private JPanel mainPanel(){
 
         JPanel p = new JPanel();
-        p.setBackground(Color.BLACK);
+        p.setBackground(Color.black);
 
         p.setLayout(new GridLayout(1,2));
 
@@ -51,7 +51,7 @@ public class GameFrame extends JFrame {
 
     JPanel blackPanel(){
         JPanel p =new JPanel();
-        p.setBackground(Color.BLACK);
+        p.setBackground(Color.black);
         return p;
     }
 

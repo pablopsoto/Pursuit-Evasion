@@ -1,5 +1,7 @@
 package main.display;
 
+import main.game.board.Game;
+
 import javax.swing.*;
 import java.awt.*;
 

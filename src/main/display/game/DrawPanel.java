@@ -1,6 +1,7 @@
 package main.display.game;
 
 import main.game.board.Board;
+import main.game.board.Game;
 import main.game.board.SquareState;
 
 import java.awt.*;
@@ -28,14 +29,21 @@ public class DrawPanel
 
     }
 
-    public void draw(Graphics g)
+    public void draw(Graphics g, Game game)
     {
+        Game agent = game;
+        Board board = new Board(10, 10);
+        System.out.println("BoardWidth = " + board.getWidth());
+        System.out.println("BoardHeight = " + board.getHeight());
         g.setColor(Color.black);
         g.fillRect(0,0,borderSize*2+squareSize*board.getWidth(),borderSize*2+squareSize*board.getHeight());
         for (int i = 0; i < board.getWidth(); i++)
         {
             for (int j = 0; j < board.getHeight(); j++)
             {
+//                Rectangle rect = new Rectangle(i * scale + 10, j * scale + 10, scale, scale);
+//                g.drawRect(i * scale + 10, j * scale + 10, scale-5, scale-5);
+
                 SquareState state = board.getState(i, j);
                 switch (state)
                 {
@@ -55,8 +63,8 @@ public class DrawPanel
                g.fillRect(i * squareSize + borderSize, j * squareSize + borderSize, squareSize, squareSize);
 
             }
-
-
+            g.setColor(Color.white);
+            g.fillRect(agent.agent.x * 2 +20, agent.agent.y * 2 +20, 10, 10);
         }
     }
 }

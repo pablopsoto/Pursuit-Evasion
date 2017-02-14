@@ -1,7 +1,10 @@
 package main.display;
 
+//import display.game.GameFrame;
+
 import main.display.game.GameFrame;
-import main.game.Game;
+import main.game.board.Game;
+import main.display.game.GameFrame;
 import main.game.Table;
 
 import javax.swing.*;
@@ -44,6 +47,7 @@ public class SelectPanel extends JPanel
 
         this.setPreferredSize(new Dimension(370, 125));
         this.setLayout(new GridBagLayout());
+
         GridBagConstraints c = new GridBagConstraints();
 
 
@@ -79,8 +83,8 @@ public class SelectPanel extends JPanel
             table.setCurrentHeight(Integer.parseInt(heightTextField.getText()));
 
             System.out.println("Starts game");
-            new GameFrame(table.createNewGame());
-            selectFrame.dispose();;
+            new GameFrame();
+            selectFrame.dispose();
         }
     }
 }
