@@ -1,5 +1,6 @@
 package main.game;
 
+import main.agent.Evader;
 import main.game.board.Board;
 
 /**
@@ -27,5 +28,15 @@ public class Game
     public int getWidth()
     {
         return board.getWidth();
+    }
+
+    private class GameLoop implements Runnable
+    {
+
+        @Override
+        public void run()
+        {
+            long start = System.currentTimeMillis();
+        }
     }
 }
