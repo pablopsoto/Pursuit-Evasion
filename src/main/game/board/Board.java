@@ -27,10 +27,16 @@ public class Board
                 board[i][j]=SquareState.NEUTRAL;
             }
         }
-        board[5][3] = SquareState.EVD;
-        board[5][7] = SquareState.EVD;
-        board[2][9] = SquareState.PSR;
-        board[8][2] = SquareState.PSR;
+        System.out.println("RANDOM  = " + (int)(Math.random() * width));
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.EVD;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.EVD;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.PSR;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.PSR;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.OBSTACLE;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.OBSTACLE;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.OBSTACLE;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.OBSTACLE;
+        board[(int)(Math.random() * width)][(int)(Math.random() * height)] = SquareState.OBSTACLE;
     }
 
     public SquareState getState(int width, int height){
