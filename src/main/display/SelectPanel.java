@@ -2,7 +2,7 @@ package main.display;
 
 //import display.game.GameFrame;
 
-import main.display.MainFrame;
+import main.display.game.GameFrame23;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class SelectPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             System.out.println("Starts game");
-            new GameFrame();
+            new GameFrame23();
             selectFrame.dispose();;
         }
     }
