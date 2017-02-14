@@ -3,9 +3,7 @@ package main.display;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by jeroen on 2/8/17.
- */
+
 public class MainFrame extends JFrame
 {
 
