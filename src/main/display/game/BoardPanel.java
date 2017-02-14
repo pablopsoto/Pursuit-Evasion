@@ -1,5 +1,6 @@
 package main.display.game;
 
+import main.game.Game;
 import main.game.board.Board;
 import main.game.board.SquareState;
 
@@ -21,8 +22,8 @@ public class BoardPanel extends JPanel
     private Board board;
 //    private GameState gameState;
 //    public BoardPanel(SquareState[][] board){
-    public BoardPanel(){
-        board = new Board(15,10);
+    public BoardPanel(Game game){
+        board = new Board(game.getWidth(),game.getHeight());
         int panelWidth = board.getWidth()*squareSize+borderSize*2;
         int panelHeight= board.getHeight()*squareSize+borderSize*2;
         draw = new DrawPanel(board,squareSize,borderSize);
