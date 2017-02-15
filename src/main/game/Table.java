@@ -25,4 +25,12 @@ public class Table
     {
         this.currentWidth = currentWidth;
     }
+
+    public int getCurrentHeight() {
+        return currentHeight;
+    }
+
+    public int getCurrentWidth() {
+        return currentWidth;
+    }
 }

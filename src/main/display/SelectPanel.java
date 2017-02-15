@@ -83,7 +83,7 @@ public class SelectPanel extends JPanel
             table.setCurrentHeight(Integer.parseInt(heightTextField.getText()));
 
             System.out.println("Starts game");
-            new GameFrame();
+            new GameFrame(table.getCurrentWidth(),table.getCurrentHeight());
             selectFrame.dispose();
         }
     }

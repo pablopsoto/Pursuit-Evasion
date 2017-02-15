@@ -31,13 +31,14 @@ public class DrawPanel
 
     public void draw(Graphics g, Game game)
     {
-        Game agent = game;
-        Board board = new Board(10, 10);
+        Game agent1 = game;
+        Game agent2 = game;
+        //Board board = new Board(10, 10);
         System.out.println("BoardWidth = " + board.getWidth());
         System.out.println("BoardHeight = " + board.getHeight());
         g.setColor(Color.black);
         g.fillRect(0,0,borderSize*2+squareSize*board.getWidth(),borderSize*2+squareSize*board.getHeight());
-        for (int i = 0; i < board.getWidth(); i++)
+       /* for (int i = 0; i < board.getWidth(); i++)
         {
             for (int j = 0; j < board.getHeight(); j++)
             {
@@ -63,8 +64,10 @@ public class DrawPanel
                g.fillRect(i * squareSize + borderSize, j * squareSize + borderSize, squareSize, squareSize);
 
             }
+            */
             g.setColor(Color.white);
-            g.fillRect(agent.agent.x * 2 +20, agent.agent.y * 2 +20, 10, 10);
+            g.fillRect(agent1.agent.x * 2 +20, agent1.agent.y * 2 +20, 10, 10);
+
         }
     }
-}
+

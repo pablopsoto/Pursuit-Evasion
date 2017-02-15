@@ -14,7 +14,7 @@ public class GameFrame extends JFrame
     private static final long serialVersionUID = 1L;
     BoardPanel boardPanel;
 
-    public GameFrame(){
+    public GameFrame(int width, int height){
         //set main gui settings
         setLayout(new GridBagLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,7 +22,7 @@ public class GameFrame extends JFrame
 
         //create panel which draws the board
 
-        Game game = new Game(500,500,this);
+        Game game = new Game(width,height,this);
         //boardPanel = new BoardPanel(game);
 
         boardPanel = new BoardPanel(game);
