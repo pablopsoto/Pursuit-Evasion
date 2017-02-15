@@ -7,5 +7,7 @@ public enum SquareState
 {
     PSR,
     EVD,
-    NEUTRAL
+    NEUTRAL,
+    OBSTACLE
+
 }

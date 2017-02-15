@@ -1,5 +1,7 @@
 package main.display;
 
+import main.game.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,7 @@ public class GameFrame extends JFrame {
 
 
 
-    public GameFrame(){
+    public GameFrame(Game game){
         super("Game Frame");
 
         this.setSize(new Dimension(800, 600));
@@ -52,5 +54,6 @@ public class GameFrame extends JFrame {
         p.setBackground(Color.BLACK);
         return p;
     }
+
 
 }

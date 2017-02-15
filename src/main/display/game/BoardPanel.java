@@ -1,5 +1,9 @@
 package main.display.game;
 
+import main.game.Game;
+import main.game.board.Board;
+import main.game.board.SquareState;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,13 +13,20 @@ import java.awt.*;
 public class BoardPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
+    private final int borderSize =20;
     private DrawPanel draw;
 
-    private int panelWidth = 750;
-    private int panelHeight = 750;
+    private int panelScale = 600;
+
+    private int squareSize = 25;
+    private Board board;
 //    private GameState gameState;
-    public BoardPanel(){
-        draw = new DrawPanel(panelWidth,panelHeight);
+//    public BoardPanel(SquareState[][] board){
+    public BoardPanel(Game game){
+        board = new Board(game.getWidth(),game.getHeight());
+        int panelWidth = board.getWidth()*squareSize+borderSize*2;
+        int panelHeight= board.getHeight()*squareSize+borderSize*2;
+        draw = new DrawPanel(board,squareSize,borderSize);
 
         setPreferredSize(new Dimension(panelWidth, panelHeight));
     }
