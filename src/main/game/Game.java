@@ -1,42 +1,112 @@
 package main.game;
 
-import main.agent.Evader;
-import main.game.board.Board;
+
+import main.game.agent.Agent;
+import main.game.obstacle.Obstacle;
+import main.logic.Handler;
+
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 /**
  * Created by Jeroen on 14/02/2017.
  */
-public class Game
-{
-
-    private Board board;
 
 
+    public class Game extends Canvas implements Runnable {
 
-    public Game(int width, int height)
-    {
-        //then create the board
-        board = new Board(width, height);
+    public final int WIDTH = 640;
+    public final int HEIGHT = WIDTH / 12 * 9;
 
+    private Thread thread;
+    private boolean running = false;
+
+    private Handler handler;
+
+    public Game() {
+        handler = new Handler();
+
+        Random random = new Random();
+
+        /*for (int i = 0; i <10; i++){
+            handler.addObject(new Agent(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8), handler));
+        }*/
+
+        handler.addObject(new Agent(WIDTH / 2 - 100, HEIGHT / 2, random.nextInt(8) + 3, handler));
+        handler.addObject(new Obstacle(500, HEIGHT / 2 - 10, random.nextInt(8) + 3, handler));
     }
 
-    public int getHeight()
-    {
-        return board.getHeight();
+    public void run() {
+
+        long lastTime = System.nanoTime();
+        double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        double delta = 0;
+        long timer = System.currentTimeMillis();
+        int frames = 0;
+
+        while (running) {
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+
+            while (delta >= 1) {
+                tick();
+                delta--;
+            }
+
+            if (running) {
+                render();
+            }
+
+            frames++;
+
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                //System.out.printf("FPS: %d \n", frames);
+                frames = 0;
+            }
+        }
+
+        stop();
     }
 
-    public int getWidth()
-    {
-        return board.getWidth();
+    public synchronized void start() {
+        thread = new Thread(this);
+        thread.start();
+        running = true;
     }
 
-    private class GameLoop implements Runnable
-    {
-
-        @Override
-        public void run()
-        {
-            long start = System.currentTimeMillis();
+    public synchronized void stop() {
+        try {
+            thread.join();
+            running = false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    private void tick() {
+        handler.tick();
+    }
+
+    private void render() {
+        BufferStrategy bs = this.getBufferStrategy();
+        if (bs == null) {
+            this.createBufferStrategy(6);
+            return;
+        }
+
+        Graphics g = bs.getDrawGraphics();
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+
+        handler.render(g);
+
+        g.dispose();
+        bs.show();
+    }
+
 }
