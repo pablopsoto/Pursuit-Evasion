@@ -3,6 +3,7 @@ package main.display;
 import main.game.Game;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class Window extends Canvas {
@@ -19,7 +20,10 @@ public class Window extends Canvas {
 
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.add(game);
+        frame.add(game,BorderLayout.CENTER);
+        frame.add(new MapPanel(game), BorderLayout.SOUTH);
+
+
 
         frame.setVisible(true);
         game.start();

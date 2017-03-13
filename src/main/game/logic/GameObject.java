@@ -5,6 +5,8 @@ import main.util.Location;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public abstract class GameObject {
 
@@ -36,6 +38,21 @@ public abstract class GameObject {
 
         polygon = new Polygon(xPoints, yPoints, sides);
 
+    }
+    public GameObject(int x, int y, int sides, ID id, Handler handler,ArrayList<Integer> xPoints, ArrayList<Integer> yPoints){
+        location = new Location(x,y);
+        this.sides = sides;
+        this.id = id;
+        this.handler = handler;
+
+        int[] xPointsInt = new int[sides];
+        int[] yPointsInt = new int[sides];
+        for(int i = 0;i<xPoints.size();i++){
+            xPointsInt[i]=xPoints.get(i);}
+        for(int i = 0;i<yPoints.size();i++){
+            yPointsInt[i]=yPoints.get(i);}
+
+        polygon = new Polygon(xPointsInt,yPointsInt,sides);
     }
 
     /**

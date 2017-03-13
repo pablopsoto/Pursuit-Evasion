@@ -10,15 +10,13 @@ import main.game.logic.ID;
  */
 public class Agent extends GameObject{
 
-
-
     public Agent(int x, int y, int sides, Handler handler) {
         super(x, y, sides, 30, ID.NEUTRAL, handler);
     }
 
     @Override
     public void applyVelocities() {
-        applyVelocites(3, 0);
+        applyVelocites(3, 1);
     }
 
     @Override

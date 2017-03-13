@@ -27,12 +27,13 @@ public class Game extends Canvas implements Runnable{
 
         Random random = new Random();
 
-        /*for (int i = 0; i <10; i++){
-            handler.addObject(new Agent(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8), handler));
-        }*/
+//        for (int i = 0; i <10; i++){
+//            handler.addObject(new Agent(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8), handler));
+//        }
 
         handler.addObject(new Agent(WIDTH/2 -100, HEIGHT/2, random.nextInt(8) +3,handler));
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3, handler));
+
     }
 
     public void run(){
@@ -89,21 +90,28 @@ public class Game extends Canvas implements Runnable{
         handler.tick();
     }
 
-    private void render(){
+    private void render()
+    {
         BufferStrategy bs = this.getBufferStrategy();
-        if(bs == null){
+        if (bs == null)
+        {
             this.createBufferStrategy(6);
             return;
         }
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GRAY);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
 
         g.dispose();
         bs.show();
+    }
+
+    public Handler getHandler()
+    {
+        return handler;
     }
 }
