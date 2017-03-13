@@ -22,6 +22,7 @@ public class Window extends Canvas {
         frame.setLocationRelativeTo(null);
         frame.add(game,BorderLayout.CENTER);
         frame.add(new MapPanel(game), BorderLayout.SOUTH);
+        frame.add(new RegularPolygonPanel(), BorderLayout.EAST);
 
 
 

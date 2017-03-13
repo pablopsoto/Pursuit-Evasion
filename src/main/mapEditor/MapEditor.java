@@ -12,9 +12,13 @@ public class MapEditor
 {
     ArrayList<Integer> xPoints = new ArrayList<Integer>();
     ArrayList<Integer> yPoints = new ArrayList<Integer>();
-    public MapEditor(Canvas game){
+
+    public MapEditor(Canvas game)
+    {
         game.addMouseListener(new EditorMouseListener());
     }
+
+    private boolean debug = false;
 
     public void createPolygon()
     {
@@ -39,41 +43,44 @@ public class MapEditor
     private class EditorMouseListener implements MouseListener
     {
 
-    @Override
-    public void mouseClicked(MouseEvent e)
-    {
-       /* xPoints.add(e.getX());
-        yPoints.add(e.getY());
-        System.out.println(xPoints);
-        System.out.println(yPoints);*/
+
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            xPoints.add(e.getX());
+            yPoints.add(e.getY());
+            if (debug)
+            {
+                System.out.println(xPoints);
+                System.out.println(yPoints);
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e)
+        {
+
+
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e)
+        {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e)
+        {
+
+        }
     }
-
-    @Override
-    public void mousePressed(MouseEvent e)
-    {
-        xPoints.add(e.getX());
-        yPoints.add(e.getY());
-        System.out.println(xPoints);
-        System.out.println(yPoints);
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e)
-    {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e)
-    {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e)
-    {
-
-    }
-}}
+}
 
