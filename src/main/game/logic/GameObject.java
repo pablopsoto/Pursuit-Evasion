@@ -17,7 +17,6 @@ public abstract class GameObject {
     protected int sides;
     protected Polygon polygon;
     protected Handler handler;
-
     public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
 
         location = new Location(x,y);
