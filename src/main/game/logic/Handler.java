@@ -16,7 +16,7 @@ public class Handler {
         }
     }
 
-    public synchronized void render(Graphics g){
+    public  void render(Graphics g){
         for(GameObject o: objects){
             o.render(g);
         }
