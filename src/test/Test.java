@@ -26,7 +26,7 @@ public class Test {
     public void testCollision(){
         Handler handler = new Handler();
         GameObject agent = new Agent(50,300,3, handler);
-        GameObject obstacle = new Obstacle(75, 300, 4, handler);
+        GameObject obstacle = new Obstacle(75, 300, 4,30, handler);
 
         handler.addObject(agent);
         handler.addObject(obstacle);
