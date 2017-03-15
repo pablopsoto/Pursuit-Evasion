@@ -65,7 +65,8 @@ public class RegularPolygonPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add regular Polygon Pressed");
-            game.getHandler().addObject(new Obstacle(editor.getX(),editor.getY(), Integer.parseInt(sidesTextField.getText()),Integer.parseInt(sizeTextField.getText()), game.getHandler()));
+            if(editor.getX()>0 && editor.getX()<game.getWidth()&&editor.getY()>0 && editor.getY()<game.getHeight()){
+            game.getHandler().addObject(new Obstacle(editor.getX(),editor.getY(), Integer.parseInt(sidesTextField.getText()),Integer.parseInt(sizeTextField.getText()), game.getHandler()));}
             RegularPolygonEditor.setEnabled(true);
             addRegularPolygon.setEnabled(false);
 
