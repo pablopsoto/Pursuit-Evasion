@@ -19,7 +19,7 @@ public class Agent extends GameObject{
         applyVelocites(0, 0);
         for (int j=0;j<10;j++) {
             for (int i = 0; i < this.getPolygon().xpoints.length; i++) {
-                System.out.println("Point: " + "X: " + this.getPolygon().xpoints[i] + "Y: " + this.getPolygon().ypoints[i]);
+                System.out.println("Point"+ i +" : " + "( " + this.getPolygon().xpoints[i] + ", " + this.getPolygon().ypoints[i] +")");
             }
             System.out.println("Centre: " + this.getLocation());
         }
@@ -27,7 +27,7 @@ public class Agent extends GameObject{
 
     @Override
     public void applyRotaion() {
-       rotation = 0.0174533;
+       rotation = Math.PI/45;
     }
 
     public void applyVelocites(int x, int y){

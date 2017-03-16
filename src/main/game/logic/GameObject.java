@@ -99,6 +99,8 @@ public abstract class GameObject {
         }
 
         g.fillPolygon(polygon);
+        g.setColor(Color.PINK);
+        g.fillOval((int)location.x -3, (int)location.y - 3, 6,6);
     }
 
     public boolean collided(Handler handler){
