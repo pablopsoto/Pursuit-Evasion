@@ -35,7 +35,7 @@ public class MapPanel extends JPanel
         @Override
         public void actionPerformed(ActionEvent e)
         {
-
+            editor.setNull();
             System.out.println("Button Pressed");
             polygonButton.setEnabled(false);
             addPolygon.setEnabled(true);
@@ -54,7 +54,7 @@ public class MapPanel extends JPanel
             System.out.println("Add Polygon Pressed");
             game.getHandler().addObject(new IrregularObstacle(editor.getxPoints().get(0),editor.getyPoints().get(0),editor.getxPoints().size(),game.getHandler(),editor.getxPoints(),editor.getyPoints())
             );
-            editor.setNull();
+
             addPolygon.setEnabled(false);
             polygonButton.setEnabled(true);
         }

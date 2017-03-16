@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Handler {
 
-    ArrayList<GameObject> objects = new ArrayList<>();
+    protected ArrayList<GameObject> objects = new ArrayList<>();
 
     public void tick(){
         for(GameObject o: objects){
@@ -16,7 +16,7 @@ public class Handler {
         }
     }
 
-    public void render(Graphics g){
+    public  void render(Graphics g){
         for(GameObject o: objects){
             o.render(g);
         }

@@ -20,9 +20,7 @@ public class MapEditor
 
     private boolean debug = false;
 
-    public void createPolygon()
-    {
-    }
+
 
     public ArrayList<Integer> getxPoints()
     {

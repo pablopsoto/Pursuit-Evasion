@@ -9,8 +9,8 @@ import main.game.logic.ID;
  */
 public class Obstacle extends GameObject {
 
-    public Obstacle(int x, int y, int sides, Handler handler) {
-        super(x, y, sides, 30, ID.OBSTABLE, handler);
+    public Obstacle(int x, int y, int sides,int radius, Handler handler) {
+        super(x, y, sides, radius, ID.OBSTABLE, handler);
     }
 
     @Override

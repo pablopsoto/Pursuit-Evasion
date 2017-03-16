@@ -17,7 +17,6 @@ public abstract class GameObject {
     protected int sides;
     protected Polygon polygon;
     protected Handler handler;
-
     public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
 
         location = new Location(x,y);
@@ -55,22 +54,33 @@ public abstract class GameObject {
         polygon = new Polygon(xPointsInt,yPointsInt,sides);
     }
 
+    public Polygon getPolygon(){
+            return polygon;
+        }
+    public Location getLocation(){
+        return location;
+    }
     /**
      * This method is going to be used to run the logic of each GameObject
      */
     public void tick(){
         applyVelocities();
-        applyRotaion();
 
         polygon.translate(velX, velY);
-        polygon = rotatedPolygon(rotation, polygon);
+        location.x += velX;
+        location.y += velY;
 
         if (collided(handler)) {
             //System.out.println("COLIDED");
             polygon.translate(-velX, -velY);
+            location.x -= velX;
+            location.y -= velY;
         } else {
-           // System.out.println("NOT COLIDED");
+            // System.out.println("NOT COLIDED");
         }
+
+        applyRotaion();
+        polygon = rotatedPolygon(rotation, polygon);
     }
 
     /**
@@ -119,16 +129,28 @@ public abstract class GameObject {
         int y = (int) location.y;
 
         for (int i = 0; i < xs.length; i++){
-            int tempx = xs[i];
-            int tempy = ys[i];
+            Location temp = new Location(xs[i], ys[i]);
 
-            xs[i] = (int)(tempx * Math.cos(theta) - tempy * Math.sin(theta));
-            ys[i] = (int)(tempy * Math.cos(theta) + tempx * Math.sin(theta));
+            rotationPoint(location, temp, theta);
+
+            xs[i] = (int) temp.x;
+            ys[i] = (int) temp.y;
         }
 
         Polygon p = new Polygon(xs, ys, xs.length);
 
         return p;
+    }
+
+    private void rotationPoint(Location origin, Location point, double theta){
+        double x1 = point.x - origin.x;
+        double y1 = point.y - origin.y;
+
+        double x2 = x1 * Math.cos(theta) - y1 * Math.sin(theta);
+        double y2 = x1 * Math.sin(theta) + y1 * Math.cos(theta);
+
+        point.x = (float)x2 + origin.x;
+        point.y = (float)y2 + origin.y;
     }
 
     public abstract void applyVelocities();
