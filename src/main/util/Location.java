@@ -15,5 +15,8 @@ public class Location {
         float dy = a.y - b.y;
         return (float) Math.sqrt(dx * dx + dy * dy);
     }
+    public String toString(){
+        return "("+x+","+y+")";
+    }
 
 }

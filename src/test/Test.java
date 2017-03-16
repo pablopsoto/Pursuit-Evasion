@@ -1,3 +1,4 @@
+package test;
 
 import main.game.Game;
 import main.game.agent.Agent;
@@ -40,6 +41,23 @@ public class Test {
 
     public void testCanvas(){
         new Game();
+    }
+
+    @org.junit.Test
+    public void testRotation(){
+        Handler handler = new Handler();
+        GameObject agent = new Agent(0,0,3,handler);
+        for(int i=0; i<agent.getPolygon().xpoints.length; i++){
+            System.out.println("Point: " + "X: " + agent.getPolygon().xpoints[i] + "Y: " + agent.getPolygon().ypoints[i]);
+        }
+        System.out.println("Centre: " + agent.getLocation() );
+        for (int j=0;j<10;j++) {
+            agent.rotatedPolygon(Math.PI / 2, agent.getPolygon());
+            for (int i = 0; i < agent.getPolygon().xpoints.length; i++) {
+                System.out.println("Point: " + "X: " + agent.getPolygon().xpoints[i] + "Y: " + agent.getPolygon().ypoints[i]);
+            }
+            System.out.println("Centre: " + agent.getLocation());
+        }
     }
 
 }
