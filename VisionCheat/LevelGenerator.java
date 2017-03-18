@@ -1,4 +1,4 @@
-/*
+
 package VisionCheat;
 
 import java.util.ArrayList;
@@ -147,7 +147,7 @@ public class LevelGenerator {
 		return count;
 	}
 
-	*/
+
 /**
 	 * Single wall with multiple segments, depending on nr. of walls. A wall
 	 * with 2 doors will have 3 walls.
@@ -158,7 +158,7 @@ public class LevelGenerator {
 	 * @param maxY
 	 * @param walls
 	 * @return
-	 *//*
+	 */
 
 	public List<Line> createWallSegments(double minX, double minY, double maxX, double maxY, int walls) {
 
@@ -198,4 +198,4 @@ public class LevelGenerator {
 	}
 
 }
-*/
+

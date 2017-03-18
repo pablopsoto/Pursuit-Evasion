@@ -1,55 +1,53 @@
-/*
 package VisionCheat;
 
-import main.vision.Line;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Algorithm {
 
-*
+/*
 	 * Sweep around the given circle with the given distance and create the scan lines
 	 * @param startX
 	 * @param startY
 	 * @return
-
+	 */
 
 	public List<Line> createScanLines(double startX, double startY) {
-
+		
 		List<Line> scanLines;
 		double angle1 = 0;
 		double angleStart = 0 + angle1* 2*Math.PI;
 		double angleEnd = (angle1*Math.PI*2) + 0.5*Math.PI;
 		double step = Math.PI / Settings.get().getScanLineCount();
-
+		
 		scanLines = new ArrayList<>();
 		scanLines.add(new Line( new PVector( startX, startY),new PVector( startX, startY)));
-
+		
 		PVector scanLine = new PVector( startX, startY);
 		double scanLineLength = Settings.get().getScanLineLength();
-
+		
 		for( double angle = angleStart; angle < angleEnd; angle += step) {
 
 			double x = scanLine.x + Math.cos(angle) * scanLineLength;
 			double y = scanLine.y + Math.sin(angle) * scanLineLength;
-
+			
 			Line line = new Line( scanLine, new PVector( x, y));
-
+			
 			scanLines.add( line);
 
 		}
-
+		
 		return scanLines;
 	}
-
-*
+	
+/*
 	 * Get all the intersecting points for the given scan lines and the given scene lines.
      *
 	 * @param scanLines
 	 * @param sceneLines
 	 * @return
-
+*/
 
 	public List<PVector> getIntersectionPoints(List<Line> scanLines, List<Line> sceneLines) {
 
@@ -62,7 +60,7 @@ public class Algorithm {
 			double x = 0;
 			double y = 0;
 			double dist = Double.MAX_VALUE;
-
+			
 			// find the intersection that is closest to the scanline
 			if (intersections.size() > 0) {
 
@@ -87,12 +85,12 @@ public class Algorithm {
 		return points;
 	}
 
-*
+/*
 	 * Find intersecting lines
 	 * @param scanLine
 	 * @param sceneLines
 	 * @return
-
+*/
 
 	public List<PVector> getIntersections(Line scanLine, List<Line> sceneLines) {
 
@@ -188,4 +186,3 @@ public class Algorithm {
 	}
 
 }
-*/

@@ -1,4 +1,3 @@
-/*
 package VisionCheat;
 
 import java.util.List;
@@ -23,10 +22,10 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
-*/
+
 /**
  * Brute Force Line of Sight Algorithm: Use ScanLines to detect the visible area from a given position. 
- *//*
+ */
 
 public class Main extends Application {
 
@@ -38,10 +37,10 @@ public class Main extends Application {
 	Canvas foregroundCanvas;
 	GraphicsContext foregroundGraphicsContext;
 
-	*/
+
 /**
 	 * Container for canvas and other nodes like attractors and repellers
-	 *//*
+	 */
 
 	Pane layerPane;
 
@@ -51,10 +50,10 @@ public class Main extends Application {
 
 	List<Line> sceneLines;
 	
-	*/
+
 /**
 	 * Current mouse location
-	 *//*
+	 */
 
 	MouseStatus mouseStatus = new MouseStatus();
 	
@@ -237,14 +236,14 @@ public class Main extends Application {
 			
 			int count = 0;
 			gc.beginPath();
-				for( PVector point: points) {
-					if( count == 0) {
-						gc.moveTo(point.x, point.y);
-					} else {
-						gc.lineTo(point.x, point.y);
-					}
-					count++;
+			for( PVector point: points) {
+				if( count == 0) {
+					gc.moveTo(point.x, point.y);
+				} else {
+					gc.lineTo(point.x, point.y);
 				}
+				count++;
+			}
 			gc.closePath();
 			
 			// stroke
@@ -293,10 +292,10 @@ public class Main extends Application {
 	}
 	
 
-	*/
+
 /**
 	 * Listeners for keyboard, mouse
-	 *//*
+	 */
 
 	private void addInputListeners() {
 		
@@ -356,10 +355,10 @@ public class Main extends Application {
 		
 	}
 	
-	*/
+	
 /**
 	 * Listeners for settings changes
-	 *//*
+	 */
 
 	private void addSettingsListeners() {
 		
@@ -370,11 +369,11 @@ public class Main extends Application {
 		Settings.get().roomIterationsProperty().addListener((ChangeListener<Number>) (observable, oldValue, newValue) -> createObjects());
 	}
 
-	*/
+
 /**
 	 * Context menu for the canvas
 	 * @param node
-	 *//*
+	 */
 
 	public void addCanvasContextMenu( Node node) {
 		
@@ -402,4 +401,4 @@ public class Main extends Application {
 
 
 }
-*/
+

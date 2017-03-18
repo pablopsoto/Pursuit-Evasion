@@ -1,10 +1,8 @@
-/*
 package VisionCheat;
 
-*/
 /**
  * Helper class for frame rate calculation
- *//*
+ */
 
 public class FpsCounter {
 
@@ -40,4 +38,4 @@ public class FpsCounter {
 	}
 	
 }
-*/
+
