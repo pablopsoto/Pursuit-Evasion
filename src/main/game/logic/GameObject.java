@@ -1,6 +1,7 @@
 package main.game.logic;
 
-import VisionCheat.PVector;
+import main.vision.Line;
+import main.vision.PVector;
 import main.util.Location;
 
 import java.awt.*;
@@ -52,7 +53,13 @@ public abstract class GameObject {
         for(int i = 0;i<xPoints.size();i++){
             xPointsInt[i]=xPoints.get(i);
             yPointsInt[i]=yPoints.get(i);
-            handler.getSceneLines().add(new PVector(xPoints.get(i),yPoints.get(i)));
+            if(i>1)
+            {
+                PVector start = new PVector(xPoints.get(i-1),yPoints.get(i-1));
+                PVector end = new PVector(xPoints.get(i),yPoints.get(i));
+            handler.getSceneLines().add(new Line(start,end));
+            }
+
         }
 
         polygon = new Polygon(xPointsInt,yPointsInt,sides);

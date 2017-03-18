@@ -1,8 +1,6 @@
 package main.game;
 
 import VisionCheat.Algorithm;
-import VisionCheat.Settings;
-import javafx.scene.canvas.GraphicsContext;
 import main.display.Window;
 import main.game.agent.Agent;
 import main.game.logic.Handler;
@@ -15,7 +13,6 @@ import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.util.*;
 
-import main.game.Line;
 public class Game extends Canvas implements Runnable{
 
     public final int WIDTH = 800;
@@ -39,7 +36,7 @@ public class Game extends Canvas implements Runnable{
         java.util.List<Line> scanLines = algorithm.createScanLines( 100,100);
         
         this.addKeyListener(new KeyIn(handler));
-        Canvas window =new Canvas(WIDTH, HEIGHT, "Pursuit-Evasion", this);
+        new Window(WIDTH, HEIGHT, "Pursuit-Evasion", this);
 
         Random random = new Random();
 
@@ -52,27 +49,7 @@ public class Game extends Canvas implements Runnable{
 
         addSides();
 
-        gc = window.getGraphics();
-    }
-    public void paintOnCanvas(){
-        if( Settings.get().isEnvironmentVisible()) {
-
-
-            // scene lines
-            gc.setStroke(javafx.scene.paint.Color.BLACK);
-            gc.setFill(javafx.scene.paint.Color.BLACK);
-
-            for( main.game.Line line: handler.getSceneLines()) {
-                drawLine(line);
-            }
-        }
-    }
-
-    private void drawLine( Line line) {
-
-
-        gc.strokeLine(line.getStart().x, line.getStart().y, line.getEnd().x, line.getEnd().y);
-
+//        gc = window.getGraphics();
     }
 
 

@@ -1,9 +1,7 @@
 package main.game.logic;
 
 
-import VisionCheat.PVector;
-import main.game.Line;
-import main.game.logic.GameObject;
+import main.vision.Line;
 
 import java.awt.*;
 import java.util.*;

@@ -1,7 +1,5 @@
 package VisionCheat;
 
-import main.game.Line;
-
 import java.util.ArrayList;
 import java.util.List;
 
