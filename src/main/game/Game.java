@@ -1,5 +1,6 @@
 package main.game;
 
+import main.game.logic.ID;
 import main.vision.Algorithm;
 import main.display.Window;
 import main.game.agent.Agent;
@@ -8,11 +9,13 @@ import main.game.logic.KeyIn;
 import main.game.obstacle.IrregularObstacle;
 import main.game.obstacle.Obstacle;
 import main.vision.Line;
+import main.vision.PVector;
 
 import java.awt.*;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.util.*;
+import java.util.List;
 
 public class Game extends Canvas implements Runnable{
 
@@ -33,25 +36,41 @@ public class Game extends Canvas implements Runnable{
         handler = new Handler();
         algorithm = new Algorithm();
 
-        java.util.List<Line> scanLines = algorithm.createScanLines( 100,100);
+        List<Line> scanLines = algorithm.createScanLines( 100,100);
+//        handler.addObject(new Obstacle(150,150,4,50,handler));
         
         this.addKeyListener(new KeyIn(handler));
         new Window(WIDTH, HEIGHT, "Pursuit-Evasion", this);
 
         Random random = new Random();
 
-//        for (int i = 0; i <10; i++){
-//            handler.addObject(new Agent(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8), handler));
-//        }
+        for (int i = 0; i <10; i++){
+            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8),10, handler));
+        }
 
         handler.addObject(new Agent(WIDTH/2 -100, HEIGHT/2, random.nextInt(8) +3,handler));
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
 
         addSides();
+        visionStart(scanLines,handler.getSceneLines());
+
 
 //        gc = window.getGraphics();
     }
 
+    public void visionStart(List<Line> scanLines , List<Line> sceneLines ){
+        List<PVector> points = algorithm.getIntersectionPoints( scanLines, sceneLines);
+        int count=0;
+        for( PVector point: points) {
+
+            if( count == 0) {
+//                g.moveTo(point.x, point.y);
+            } else {
+                getGraphics().drawLine((int)points.get(count-1).x,(int)points.get(count-1).y,(int)point.x,(int)point.y);
+            }
+            count++;
+        }
+    }
 
     public void addSides(){
         Integer[] arrayX= {0,borderSize,borderSize,0};

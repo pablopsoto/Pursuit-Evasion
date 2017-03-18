@@ -11,17 +11,19 @@ public class Handler {
 
     protected ArrayList<GameObject> objects = new ArrayList<>();
     protected java.util.List<Line> sceneLines = new ArrayList<>();
+    protected java.util.List<Line> scanLines = new ArrayList<>();
 
-    public void tick(){
+    synchronized public void tick(){
         for(GameObject o: objects){
-            o.tick();
+           o.tick();
         }
     }
 
-    public  void render(Graphics g){
+    synchronized public     void render(Graphics g){
         for(GameObject o: objects){
             o.render(g);
         }
+
     }
 
     public void addObject(GameObject object){

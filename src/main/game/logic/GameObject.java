@@ -7,23 +7,22 @@ import main.util.Location;
 import java.awt.*;
 import java.awt.geom.Area;
 import java.util.*;
-import java.util.List;
 
-public abstract class GameObject {
+public abstract class GameObject
+{
 
     protected Location location;
     protected ID id;
     protected int velX, velY;
     protected double rotation;
     protected int sides;
-    protected Polygon polygon;
+    protected Polygon polygon = null;
     protected Handler handler;
 
 
-
-
-    public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
-        location = new Location(x,y);
+    public GameObject(int x, int y, int sides, int radius, ID id, Handler handler)
+    {
+        location = new Location(x, y);
         this.sides = sides;
         this.id = id;
         this.handler = handler;
@@ -33,93 +32,127 @@ public abstract class GameObject {
 
         double angle = 2 * Math.PI / sides;
 
-        for (int i = 0; i < sides; i++){
+        for (int i = 0; i < sides; i++)
+        {
             double a = i * angle;
-            xPoints[i] = (int)(location.x + Math.cos(a) * radius);
-            yPoints[i] = (int)(location.y + Math.sin(a) * radius);
+            xPoints[i] = (int) (location.x + Math.cos(a) * radius);
+            yPoints[i] = (int) (location.y + Math.sin(a) * radius);
+            if (i > 1)
+            {
+                PVector start = new PVector(xPoints[i-1], yPoints[i-1]);
+                PVector end = new PVector(xPoints[i], yPoints[i]);
+                handler.getSceneLines().add(new Line(start,end));
+            }
+            System.out.println("Scenelines " + handler.getSceneLines());
         }
+
 
         polygon = new Polygon(xPoints, yPoints, sides);
 
     }
-    public GameObject(int x, int y, int sides, ID id, Handler handler,ArrayList<Integer> xPoints, ArrayList<Integer> yPoints){
-        location = new Location(x,y);
+
+    public GameObject(int x, int y, int sides, ID id, Handler handler, ArrayList<Integer> xPoints, ArrayList<Integer>
+            yPoints)
+    {
+        location = new Location(x, y);
         this.sides = sides;
         this.id = id;
         this.handler = handler;
 
         int[] xPointsInt = new int[sides];
         int[] yPointsInt = new int[sides];
-        for(int i = 0;i<xPoints.size();i++){
-            xPointsInt[i]=xPoints.get(i);
-            yPointsInt[i]=yPoints.get(i);
-            if(i>1)
+        for (int i = 0; i < xPoints.size(); i++)
+        {
+            xPointsInt[i] = xPoints.get(i);
+            yPointsInt[i] = yPoints.get(i);
+            if (i > 1)
             {
-                PVector start = new PVector(xPoints.get(i-1),yPoints.get(i-1));
-                PVector end = new PVector(xPoints.get(i),yPoints.get(i));
-//            handler.getSceneLines().add(new Line(start,end));
+                PVector start = new PVector(xPoints.get(i - 1), yPoints.get(i - 1));
+                PVector end = new PVector(xPoints.get(i), yPoints.get(i));
+                handler.getSceneLines().add(new Line(start,end));
             }
-
+            System.out.println("Scenelines " + handler.getSceneLines());
         }
 
-        polygon = new Polygon(xPointsInt,yPointsInt,sides);
+        polygon = new Polygon(xPointsInt, yPointsInt, sides);
     }
 
     /**
      * This method is going to be used to run the logic of each GameObject
      */
-    public void tick(){
+    public void tick()
+    {
         applyVelocities();
         applyRotaion();
+
 
         polygon.translate(velX, velY);
         polygon = rotatedPolygon(rotation, polygon);
 
-        if (collided(handler)) {
+
+        if (collided(handler))
+        {
             //System.out.println("COLIDED");
             polygon.translate(-velX, -velY);
-        } else {
-           // System.out.println("NOT COLIDED");
+        } else
+        {
+            // System.out.println("NOT COLIDED");
         }
     }
 
     /**
      * @param g graphics where GameObject will be rendered
      */
-    public void render(Graphics g){
+    public void render(Graphics g)
+    {
 
-        if(id == ID.EVADOR){
+        if (id == ID.EVADOR)
+        {
             g.setColor(Color.CYAN);
-        } else if (id == ID.PURSUER){
+        } else if (id == ID.PURSUER)
+        {
             g.setColor(Color.RED);
-        } else if (id == ID.OBSTABLE){
+        } else if (id == ID.OBSTABLE)
+        {
             g.setColor(Color.WHITE);
-        }   else{
+        } else
+        {
             g.setColor(Color.ORANGE);
         }
 
         g.fillPolygon(polygon);
     }
 
-    public boolean collided(Handler handler){
+    public boolean collided(Handler handler)
+    {
         boolean collided = false;
         Area a1 = new Area(polygon);
 
-        for (GameObject o: handler.objects){
+
+        for (GameObject o : handler.objects)
+        {
+
             Area a2 = new Area(o.polygon);
-            if(!this.equals(o)) {
+            if (!this.equals(o))
+            {
+
                 a2.intersect(a1);
-                if (!a2.isEmpty()) {
+                if (!a2.isEmpty())
+                {
                     collided = true;
                     break;
                 }
             }
+
+
         }
+
 
         return collided;
     }
 
-    public Polygon rotatedPolygon(double theta, Polygon polygon){
+    public Polygon rotatedPolygon(double theta, Polygon polygon)
+    {
 
         //TODO: it rotates in the origin, not the polygon
 
@@ -128,12 +161,13 @@ public abstract class GameObject {
         int x = (int) location.x;
         int y = (int) location.y;
 
-        for (int i = 0; i < xs.length; i++){
+        for (int i = 0; i < xs.length; i++)
+        {
             int tempx = xs[i];
             int tempy = ys[i];
 
-            xs[i] = (int)(tempx * Math.cos(theta) - tempy * Math.sin(theta));
-            ys[i] = (int)(tempy * Math.cos(theta) + tempx * Math.sin(theta));
+            xs[i] = (int) (tempx * Math.cos(theta) - tempy * Math.sin(theta));
+            ys[i] = (int) (tempy * Math.cos(theta) + tempx * Math.sin(theta));
         }
 
         Polygon p = new Polygon(xs, ys, xs.length);
@@ -142,6 +176,7 @@ public abstract class GameObject {
     }
 
     public abstract void applyVelocities();
+
     public abstract void applyRotaion();
 
 }

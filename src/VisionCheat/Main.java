@@ -237,14 +237,14 @@ public class Main extends Application {
 			
 			int count = 0;
 			gc.beginPath();
-			for( PVector point: points) {
-				if( count == 0) {
-					gc.moveTo(point.x, point.y);
-				} else {
-					gc.lineTo(point.x, point.y);
+				for( PVector point: points) {
+					if( count == 0) {
+						gc.moveTo(point.x, point.y);
+					} else {
+						gc.lineTo(point.x, point.y);
+					}
+					count++;
 				}
-				count++;
-			}
 			gc.closePath();
 			
 			// stroke
