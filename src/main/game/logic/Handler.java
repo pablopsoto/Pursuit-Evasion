@@ -10,7 +10,7 @@ import java.util.List;
 public class Handler {
 
     protected ArrayList<GameObject> objects = new ArrayList<>();
-    protected java.util.List<Line> sceneLines;
+    protected java.util.List<Line> sceneLines = new ArrayList<>();
 
     public void tick(){
         for(GameObject o: objects){
