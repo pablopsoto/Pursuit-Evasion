@@ -1,8 +1,11 @@
+/*
 package VisionCheat;
 
+*/
 /**
  * Helper class for frame rate calculation
- */
+ *//*
+
 public class FpsCounter {
 
 	final long[] frameTimes = new long[100];
@@ -37,3 +40,4 @@ public class FpsCounter {
 	}
 	
 }
+*/

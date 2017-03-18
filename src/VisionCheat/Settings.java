@@ -1,3 +1,4 @@
+/*
 package VisionCheat;
 
 import javafx.beans.property.BooleanProperty;
@@ -24,9 +25,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+*/
 /**
  * Application settings
- */
+ *//*
+
 public class Settings {
 
 	// ================================================================================================
@@ -83,9 +86,11 @@ public class Settings {
 	private Settings() {
 	}
 	
-	/**
+	*/
+/**
 	 * Return the one instance of this class
-	 */
+	 *//*
+
 	public static Settings get() {
 		return settings;
 	}
@@ -448,3 +453,4 @@ public class Settings {
 	
 	
 }
+*/

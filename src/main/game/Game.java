@@ -1,12 +1,13 @@
 package main.game;
 
-import VisionCheat.Algorithm;
+import main.vision.Algorithm;
 import main.display.Window;
 import main.game.agent.Agent;
 import main.game.logic.Handler;
 import main.game.logic.KeyIn;
 import main.game.obstacle.IrregularObstacle;
 import main.game.obstacle.Obstacle;
+import main.vision.Line;
 
 import java.awt.*;
 import java.awt.Color;

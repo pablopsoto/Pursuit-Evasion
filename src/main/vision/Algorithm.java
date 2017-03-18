@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Algorithm {
 
-	/**
+/*
 	 * Sweep around the given circle with the given distance and create the scan lines
 	 * @param startX
 	 * @param startY
 	 * @return
 	 */
+
 	public List<Line> createScanLines(double startX, double startY) {
 		
 		List<Line> scanLines;
@@ -39,13 +40,14 @@ public class Algorithm {
 		return scanLines;
 	}
 	
-	/**
+/*
 	 * Get all the intersecting points for the given scan lines and the given scene lines.
      *
 	 * @param scanLines
 	 * @param sceneLines
 	 * @return
-	 */
+*/
+
 	public List<PVector> getIntersectionPoints(List<Line> scanLines, List<Line> sceneLines) {
 
 		List<PVector> points = new ArrayList<>();
@@ -82,12 +84,13 @@ public class Algorithm {
 		return points;
 	}
 
-	/**
+/*
 	 * Find intersecting lines
 	 * @param scanLine
 	 * @param sceneLines
 	 * @return
-	 */
+*/
+
 	public List<PVector> getIntersections(Line scanLine, List<Line> sceneLines) {
 
 		List<PVector> list = new ArrayList<>();

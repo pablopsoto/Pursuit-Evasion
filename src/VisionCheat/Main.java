@@ -1,3 +1,4 @@
+/*
 package VisionCheat;
 
 import java.util.List;
@@ -22,9 +23,11 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
+*/
 /**
  * Brute Force Line of Sight Algorithm: Use ScanLines to detect the visible area from a given position. 
- */
+ *//*
+
 public class Main extends Application {
 
 	Random rnd = new Random();
@@ -35,9 +38,11 @@ public class Main extends Application {
 	Canvas foregroundCanvas;
 	GraphicsContext foregroundGraphicsContext;
 
-	/**
+	*/
+/**
 	 * Container for canvas and other nodes like attractors and repellers
-	 */
+	 *//*
+
 	Pane layerPane;
 
 	AnimationTimer animationLoop;
@@ -46,9 +51,11 @@ public class Main extends Application {
 
 	List<Line> sceneLines;
 	
-	/**
+	*/
+/**
 	 * Current mouse location
-	 */
+	 *//*
+
 	MouseStatus mouseStatus = new MouseStatus();
 	
 	LevelGenerator levelGenerator;
@@ -286,9 +293,11 @@ public class Main extends Application {
 	}
 	
 
-	/**
+	*/
+/**
 	 * Listeners for keyboard, mouse
-	 */
+	 *//*
+
 	private void addInputListeners() {
 		
 		// capture mouse position
@@ -347,9 +356,11 @@ public class Main extends Application {
 		
 	}
 	
-	/**
+	*/
+/**
 	 * Listeners for settings changes
-	 */
+	 *//*
+
 	private void addSettingsListeners() {
 		
 		// particle size
@@ -359,10 +370,12 @@ public class Main extends Application {
 		Settings.get().roomIterationsProperty().addListener((ChangeListener<Number>) (observable, oldValue, newValue) -> createObjects());
 	}
 
-	/**
+	*/
+/**
 	 * Context menu for the canvas
 	 * @param node
-	 */
+	 *//*
+
 	public void addCanvasContextMenu( Node node) {
 		
 		MenuItem menuItem;
@@ -389,3 +402,4 @@ public class Main extends Application {
 
 
 }
+*/

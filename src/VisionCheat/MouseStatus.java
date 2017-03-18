@@ -1,3 +1,4 @@
+/*
 package VisionCheat;
 
 public class MouseStatus {
@@ -34,3 +35,4 @@ public class MouseStatus {
 	
 	
 }
+*/
