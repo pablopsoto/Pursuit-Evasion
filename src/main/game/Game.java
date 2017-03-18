@@ -34,9 +34,7 @@ public class Game extends Canvas implements Runnable{
 
     public Game(){
         handler = new Handler();
-        algorithm = new Algorithm();
 
-        handler.setScanLines(algorithm.createScanLines( 100,100));
 //        handler.addObject(new Obstacle(150,150,4,50,handler));
         
         this.addKeyListener(new KeyIn(handler));
@@ -51,26 +49,15 @@ public class Game extends Canvas implements Runnable{
         handler.addObject(new Agent(WIDTH/2 -100, HEIGHT/2, random.nextInt(8) +3,handler));
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
 
-        addSides();
 
+
+        addSides();
 
 
 //        gc = window.getGraphics();
     }
 
-    public void visionStart( ){
-        List<PVector> points = algorithm.getIntersectionPoints( handler.getScanLines(), handler.getSceneLines());
-        int count=0;
-        for( PVector point: points) {
 
-            if( count == 0) {
-//                g.moveTo(point.x, point.y);
-            } else {
-                getGraphics().drawLine((int)points.get(count-1).x,(int)points.get(count-1).y,(int)point.x,(int)point.y);
-            }
-            count++;
-        }
-    }
 
     public void addSides(){
         Integer[] arrayX= {0,borderSize,borderSize,0};
@@ -122,6 +109,7 @@ public class Game extends Canvas implements Runnable{
             lastTime = now;
             while (delta >= 1){
                 tick();
+
                 delta--;
             }
 
@@ -136,6 +124,7 @@ public class Game extends Canvas implements Runnable{
                 //System.out.printf("FPS: %d \n", frames);
                 frames = 0;
             }
+
         }
 
         stop();
