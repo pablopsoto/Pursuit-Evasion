@@ -13,20 +13,19 @@ public class Handler {
     protected java.util.List<Line> sceneLines = new ArrayList<>();
     protected java.util.List<Line> scanLines = new ArrayList<>();
 
-    synchronized public void tick(){
+     public synchronized void tick(){
         for(GameObject o: objects){
            o.tick();
         }
     }
 
-    synchronized public     void render(Graphics g){
-        for(GameObject o: objects){
+     public synchronized void render(Graphics g){
+       for(GameObject o: objects){
             o.render(g);
         }
-
     }
 
-    public void addObject(GameObject object){
+    public synchronized void addObject(GameObject object){
         objects.add(object);
     }
 
@@ -37,5 +36,15 @@ public class Handler {
     public List<Line> getSceneLines()
     {
         return sceneLines;
+    }
+
+    public List<Line> getScanLines()
+    {
+        return scanLines;
+    }
+
+    public void setScanLines(List<Line> scanLines)
+    {
+        this.scanLines = scanLines;
     }
 }

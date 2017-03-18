@@ -80,7 +80,7 @@ public abstract class GameObject
     /**
      * This method is going to be used to run the logic of each GameObject
      */
-    public void tick()
+    public  void tick()
     {
         applyVelocities();
         applyRotaion();
@@ -123,7 +123,7 @@ public abstract class GameObject
         g.fillPolygon(polygon);
     }
 
-    public boolean collided(Handler handler)
+    public synchronized boolean collided(Handler handler)
     {
         boolean collided = false;
         Area a1 = new Area(polygon);

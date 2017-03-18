@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable{
         handler = new Handler();
         algorithm = new Algorithm();
 
-        List<Line> scanLines = algorithm.createScanLines( 100,100);
+        handler.setScanLines(algorithm.createScanLines( 100,100));
 //        handler.addObject(new Obstacle(150,150,4,50,handler));
         
         this.addKeyListener(new KeyIn(handler));
@@ -52,14 +52,14 @@ public class Game extends Canvas implements Runnable{
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
 
         addSides();
-        visionStart(scanLines,handler.getSceneLines());
+
 
 
 //        gc = window.getGraphics();
     }
 
-    public void visionStart(List<Line> scanLines , List<Line> sceneLines ){
-        List<PVector> points = algorithm.getIntersectionPoints( scanLines, sceneLines);
+    public void visionStart( ){
+        List<PVector> points = algorithm.getIntersectionPoints( handler.getScanLines(), handler.getSceneLines());
         int count=0;
         for( PVector point: points) {
 
@@ -120,7 +120,6 @@ public class Game extends Canvas implements Runnable{
             long now = System.nanoTime();
             delta += (now - lastTime) /ns;
             lastTime = now;
-
             while (delta >= 1){
                 tick();
                 delta--;
