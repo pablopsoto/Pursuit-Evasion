@@ -57,7 +57,7 @@ public abstract class GameObject {
             {
                 PVector start = new PVector(xPoints.get(i-1),yPoints.get(i-1));
                 PVector end = new PVector(xPoints.get(i),yPoints.get(i));
-            handler.getSceneLines().add(new Line(start,end));
+//            handler.getSceneLines().add(new Line(start,end));
             }
 
         }

@@ -26,7 +26,6 @@ public class Game extends Canvas implements Runnable{
     private Algorithm algorithm;
     private int borderSize =20;
 
-    Graphics gc;
 
 
 
