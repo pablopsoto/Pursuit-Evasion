@@ -13,7 +13,6 @@ public class Algorithm {
 	 */
 
 	public List<Line> createScanLines(double startX, double startY) {
-		
 		List<Line> scanLines;
 		double angle1 = 0;
 		double angleStart = 0 + angle1* 2*Math.PI;
