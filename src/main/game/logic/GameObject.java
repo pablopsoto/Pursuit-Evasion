@@ -43,8 +43,10 @@ public abstract class GameObject
                 PVector end = new PVector(xPoints[i], yPoints[i]);
                 handler.getSceneLines().add(new Line(start,end));
             }
+
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
+//        handler.getSceneLines().add(new Line(new PVector(xPoints[0],yPoints[0]),new PVector(xPoints[1],yPoints[1]) ));
 
 
         polygon = new Polygon(xPoints, yPoints, sides);
@@ -71,6 +73,7 @@ public abstract class GameObject
                 PVector end = new PVector(xPoints.get(i), yPoints.get(i));
                 handler.getSceneLines().add(new Line(start,end));
             }
+//            handler.getSceneLines().add(new Line(new PVector(xPoints.get(xPoints.size()-1),yPoints.get(yPoints.size()-1)), new PVector(xPoints.get(0),yPoints.get(0))));
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
 
