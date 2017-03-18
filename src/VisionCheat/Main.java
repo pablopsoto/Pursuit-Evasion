@@ -21,6 +21,7 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
+import main.game.Line;
 
 /**
  * Brute Force Line of Sight Algorithm: Use ScanLines to detect the visible area from a given position. 

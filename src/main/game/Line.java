@@ -1,5 +1,7 @@
-package VisionCheat;
+package main.game;
 
+
+import VisionCheat.PVector;
 
 public class Line {
 

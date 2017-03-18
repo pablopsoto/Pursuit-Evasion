@@ -1,5 +1,8 @@
 package main.game;
 
+import VisionCheat.Algorithm;
+import VisionCheat.Settings;
+import javafx.scene.canvas.GraphicsContext;
 import main.display.Window;
 import main.game.agent.Agent;
 import main.game.logic.Handler;
@@ -8,11 +11,11 @@ import main.game.obstacle.IrregularObstacle;
 import main.game.obstacle.Obstacle;
 
 import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
+import main.game.Line;
 public class Game extends Canvas implements Runnable{
 
     public final int WIDTH = 800;
@@ -22,12 +25,21 @@ public class Game extends Canvas implements Runnable{
     private boolean running = false;
 
     private Handler handler;
+    private Algorithm algorithm;
     private int borderSize =20;
+
+    Graphics gc;
+
+
 
     public Game(){
         handler = new Handler();
+        algorithm = new Algorithm();
+
+        java.util.List<Line> scanLines = algorithm.createScanLines( 100,100);
+        
         this.addKeyListener(new KeyIn(handler));
-        new Window(WIDTH, HEIGHT, "Pursuit-Evasion", this);
+        Canvas window =new Canvas(WIDTH, HEIGHT, "Pursuit-Evasion", this);
 
         Random random = new Random();
 
@@ -40,7 +52,29 @@ public class Game extends Canvas implements Runnable{
 
         addSides();
 
+        gc = window.getGraphics();
     }
+    public void paintOnCanvas(){
+        if( Settings.get().isEnvironmentVisible()) {
+
+
+            // scene lines
+            gc.setStroke(javafx.scene.paint.Color.BLACK);
+            gc.setFill(javafx.scene.paint.Color.BLACK);
+
+            for( main.game.Line line: handler.getSceneLines()) {
+                drawLine(line);
+            }
+        }
+    }
+
+    private void drawLine( Line line) {
+
+
+        gc.strokeLine(line.getStart().x, line.getStart().y, line.getEnd().x, line.getEnd().y);
+
+    }
+
 
     public void addSides(){
         Integer[] arrayX= {0,borderSize,borderSize,0};
@@ -59,6 +93,7 @@ public class Game extends Canvas implements Runnable{
 
         handler.addObject(new IrregularObstacle(0,0,4,handler,upXpoints,upYpoints));
 
+
         arrayX = new Integer[]{getWidth(),getWidth()-borderSize,getWidth()-borderSize,getWidth()};
         arrayY= new Integer[] {0,0,getHeight(),getHeight()};
 
@@ -76,7 +111,6 @@ public class Game extends Canvas implements Runnable{
         handler.addObject(new IrregularObstacle(0,0,4,handler,downXpoints,downYpoints));
 
     }
-
     public void run(){
 
         long lastTime = System.nanoTime();

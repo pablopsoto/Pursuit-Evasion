@@ -1,12 +1,12 @@
 package main.game.logic;
 
+import VisionCheat.PVector;
 import main.util.Location;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 public abstract class GameObject {
 
@@ -17,8 +17,11 @@ public abstract class GameObject {
     protected int sides;
     protected Polygon polygon;
     protected Handler handler;
-    public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
 
+
+
+
+    public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
         location = new Location(x,y);
         this.sides = sides;
         this.id = id;
@@ -47,9 +50,10 @@ public abstract class GameObject {
         int[] xPointsInt = new int[sides];
         int[] yPointsInt = new int[sides];
         for(int i = 0;i<xPoints.size();i++){
-            xPointsInt[i]=xPoints.get(i);}
-        for(int i = 0;i<yPoints.size();i++){
-            yPointsInt[i]=yPoints.get(i);}
+            xPointsInt[i]=xPoints.get(i);
+            yPointsInt[i]=yPoints.get(i);
+            handler.getSceneLines().add(new PVector(xPoints.get(i),yPoints.get(i)));
+        }
 
         polygon = new Polygon(xPointsInt,yPointsInt,sides);
     }
