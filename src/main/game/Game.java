@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable{
             handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8),10, handler));
         }
 
-        handler.addObject(new Agent(WIDTH/8, HEIGHT/8, 303, handler));
+        handler.addObject(new Agent(WIDTH/8, HEIGHT/8, 360, handler));
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
 
 
