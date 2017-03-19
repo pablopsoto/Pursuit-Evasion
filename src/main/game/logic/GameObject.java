@@ -7,25 +7,30 @@ import main.util.Location;
 import java.awt.*;
 import java.awt.geom.Area;
 import java.util.*;
+import java.util.List;
 
 public abstract class GameObject
 {
 
     protected Location location;
     protected ID id;
-    protected int velX, velY;
+    protected int posX, posY;
+    protected int x, y;
     protected double rotation;
     protected int sides;
     protected Polygon polygon = null;
-    protected Handler handler;
+    protected Handler objectHandler;
+    protected Handler agentHandler;
 
 
-    public GameObject(int x, int y, int sides, int radius, ID id, Handler handler)
+    public GameObject(int x, int y, int sides, int radius, ID id, Handler objectHandler)
     {
         location = new Location(x, y);
         this.sides = sides;
         this.id = id;
-        this.handler = handler;
+        this.objectHandler = objectHandler;
+        this.x = x;
+        this.y = y;
 
         int[] xPoints = new int[sides];
         int[] yPoints = new int[sides];
@@ -41,28 +46,23 @@ public abstract class GameObject
             {
                 PVector start = new PVector(xPoints[i-1], yPoints[i-1]);
                 PVector end = new PVector(xPoints[i], yPoints[i]);
-                handler.getSceneLines().add(new Line(start,end));
+                objectHandler.getSceneLines().add(new Line(start,end));
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'MapEditor2' of https://github.com/jlvelasquezsosa/Pursuit-Evasion.git
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
-//        handler.getSceneLines().add(new Line(new PVector(xPoints[0],yPoints[0]),new PVector(xPoints[1],yPoints[1]) ));
 
 
         polygon = new Polygon(xPoints, yPoints, sides);
 
     }
 
-    public GameObject(int x, int y, int sides, ID id, Handler handler, ArrayList<Integer> xPoints, ArrayList<Integer>
+    public GameObject(int x, int y, int sides, ID id, Handler objectHandler, ArrayList<Integer> xPoints, ArrayList<Integer>
             yPoints)
     {
         location = new Location(x, y);
         this.sides = sides;
         this.id = id;
-        this.handler = handler;
+        this.objectHandler = objectHandler;
 
         int[] xPointsInt = new int[sides];
         int[] yPointsInt = new int[sides];
@@ -74,12 +74,8 @@ public abstract class GameObject
             {
                 PVector start = new PVector(xPoints.get(i - 1), yPoints.get(i - 1));
                 PVector end = new PVector(xPoints.get(i), yPoints.get(i));
-                handler.getSceneLines().add(new Line(start,end));
+                objectHandler.getSceneLines().add(new Line(start,end));
             }
-<<<<<<< HEAD
-=======
-//            handler.getSceneLines().add(new Line(new PVector(xPoints.get(xPoints.size()-1),yPoints.get(yPoints.size()-1)), new PVector(xPoints.get(0),yPoints.get(0))));
->>>>>>> branch 'MapEditor2' of https://github.com/jlvelasquezsosa/Pursuit-Evasion.git
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
 
@@ -89,23 +85,26 @@ public abstract class GameObject
     /**
      * This method is going to be used to run the logic of each GameObject
      */
-    public  void tick()
+    public void tick()
     {
-        applyVelocities();
+        getDirection();
         applyRotaion();
 
 
-        polygon.translate(velX, velY);
+        polygon.translate(posX, posY);
         polygon = rotatedPolygon(rotation, polygon);
 
 
-        if (collided(handler))
+        if (collided(objectHandler))
         {
             //System.out.println("COLIDED");
-            polygon.translate(-velX, -velY);
+            polygon.translate(-posX, -posY);
+           
         } else
         {
             // System.out.println("NOT COLIDED");
+        	setX(getX()+getVelX());
+       	   	setY(getX()+getVelY());   
         }
     }
 
@@ -132,13 +131,13 @@ public abstract class GameObject
         g.fillPolygon(polygon);
     }
 
-    public synchronized boolean collided(Handler handler)
+    public synchronized boolean collided(Handler objectHandler)
     {
         boolean collided = false;
         Area a1 = new Area(polygon);
 
 
-        for (GameObject o : handler.objects)
+        for (GameObject o : objectHandler.getObjects())
         {
 
             Area a2 = new Area(o.polygon);
@@ -149,8 +148,9 @@ public abstract class GameObject
                 if (!a2.isEmpty())
                 {
                     collided = true;
-                    break;
+//                    break;
                 }
+                
             }
 
 
@@ -160,6 +160,7 @@ public abstract class GameObject
         return collided;
     }
 
+    
     public Polygon rotatedPolygon(double theta, Polygon polygon)
     {
 
@@ -183,9 +184,33 @@ public abstract class GameObject
 
         return p;
     }
+    
+    
+    public int getX(){
+    	return x;
+    }
+    
+    public void setX(int x){
+    	this.x = x;
+    }
+    
+    public void setY(int y){
+    	this.y = y;
+    }
+    
+    public int getY(){
+    	return y;
+    }
 
-    public abstract void applyVelocities();
+    public abstract void getDirection();
 
     public abstract void applyRotaion();
-
+    
+    public abstract int getVelY();
+    public abstract void setVelY(int y);
+    
+    public abstract int getVelX();
+    public abstract void setVelX(int x);
+    
+    public abstract void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines);
 }

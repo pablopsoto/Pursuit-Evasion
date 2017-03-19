@@ -18,7 +18,7 @@ public class KeyIn extends KeyAdapter {
         int key = e.getKeyChar();
         System.out.println(e.getKeyChar());
 
-        for(GameObject object : handler.objects){
+        for(GameObject object : handler.getObjects()){
 
             if(object.id == ID.NEUTRAL){
 

@@ -3,8 +3,11 @@ package main.game.obstacle;
 import main.game.logic.GameObject;
 import main.game.logic.Handler;
 import main.game.logic.ID;
+import main.vision.Line;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jeroen on 13/03/2017.
@@ -15,14 +18,44 @@ public class BorderObstacle extends GameObject{
         }
 
         @Override
-        public void applyVelocities() {
-            velX = 0;
-            velY = 0;
+        public void getDirection() {
+            posX = 0;
+            posY = 0;
         }
 
         @Override
         public void applyRotaion() {
 
         }
+
+		@Override
+		public int getVelY() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public void setVelY(int y) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public int getVelX() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public void setVelX(int x) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines) {
+			// TODO Auto-generated method stub
+			
+		}
 
 }

@@ -1,21 +1,21 @@
 package main.game;
 
-import main.game.logic.ID;
-import main.vision.Algorithm;
+
 import main.display.Window;
 import main.game.agent.Agent;
+import main.game.logic.GameObject;
 import main.game.logic.Handler;
 import main.game.logic.KeyIn;
 import main.game.obstacle.IrregularObstacle;
 import main.game.obstacle.Obstacle;
-import main.vision.Line;
-import main.vision.PVector;
+
 
 import java.awt.*;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.util.*;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Game extends Canvas implements Runnable{
 
@@ -26,9 +26,13 @@ public class Game extends Canvas implements Runnable{
     private boolean running = false;
 
     private Handler handler;
-    private Algorithm algorithm;
     private int borderSize =20;
-
+    
+    private Graphics g;
+    private BufferStrategy bs;
+    private Random random;
+    
+    ExecutorService ex = Executors.newWorkStealingPool();
 
 
 
@@ -40,18 +44,19 @@ public class Game extends Canvas implements Runnable{
         this.addKeyListener(new KeyIn(handler));
         new Window(WIDTH, HEIGHT, "Pursuit-Evasion", this);
 
-        Random random = new Random();
+        random = new Random();
 
         for (int i = 0; i <10; i++){
-            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8),30, handler));
+            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8),10, handler));
         }
 
-        handler.addObject(new Agent(WIDTH/2 -100, HEIGHT/2, random.nextInt(8) +3,handler));
+        handler.addObject(new Agent(WIDTH/8, HEIGHT/8, 303, handler));
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
 
 
 
         addSides();
+      
 
 
 //        gc = window.getGraphics();
@@ -94,6 +99,8 @@ public class Game extends Canvas implements Runnable{
         handler.addObject(new IrregularObstacle(0,0,4,handler,downXpoints,downYpoints));
 
     }
+    
+    
     public void run(){
 
         long lastTime = System.nanoTime();
@@ -109,13 +116,13 @@ public class Game extends Canvas implements Runnable{
             lastTime = now;
             while (delta >= 1){
                 tick();
-
+                render();  
                 delta--;
             }
 
-            if(running){
-                render();
-            }
+//            if(running){
+//                render();  
+//            }
 
             frames++;
 
@@ -130,13 +137,13 @@ public class Game extends Canvas implements Runnable{
         stop();
     }
 
-    public synchronized void start(){
+    public void start(){
         thread = new Thread(this);
         thread.start();
         running = true;
     }
 
-    public synchronized void stop(){
+    public void stop(){
         try{
             thread.join();
             running = false;
@@ -150,15 +157,15 @@ public class Game extends Canvas implements Runnable{
     }
 
     private void render()
-    {
-        BufferStrategy bs = this.getBufferStrategy();
+    {    	
+        bs = this.getBufferStrategy();
         if (bs == null)
         {
             this.createBufferStrategy(6);
             return;
         }
 
-        Graphics g = bs.getDrawGraphics();
+        g = bs.getDrawGraphics();
 
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, WIDTH, HEIGHT);
