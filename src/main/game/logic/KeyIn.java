@@ -1,5 +1,7 @@
 package main.game.logic;
 
+import main.game.Game;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -8,39 +10,41 @@ import java.awt.event.KeyEvent;
  */
 public class KeyIn extends KeyAdapter {
 
-    Handler handler;
 
-    public KeyIn(Handler handler){
-        this.handler = handler;
+    private Game game;
+
+    public KeyIn(Game game){
+        this.game = game;
     }
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyChar();
         System.out.println(e.getKeyChar());
 
-        for(GameObject object : handler.getObjects()){
 
-            if(object.id == ID.NEUTRAL){
 
                 if(key == 'a'){
-                    object.location.x--;
+//                    game.getAgent().setVelX(game.getAgent().getVelX()+1);
+                    game.getAgent().setX(game.getAgent().getX()-1);
+                    System.out.println("Posx" + game.getAgent().posX);
                 }
 
+
                 if(key == 'd'){
-                    object.location.x++;
+                    game.getAgent().setX(game.getAgent().getX()+1);
                 }
 
                 if(key == 'w'){
-                    object.location.y--;
+                    game.getAgent().setY(game.getAgent().getY()-1);
                 }
 
                 if(key == 's'){
-                    object.location.y++;
+                    game.getAgent().setY(game.getAgent().getY()+1);
                 }
 
-            }
 
-        }
+
+
     }
 
     public void keyReleased(KeyEvent e){

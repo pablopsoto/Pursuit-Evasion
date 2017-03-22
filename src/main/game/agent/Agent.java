@@ -17,8 +17,8 @@ import main.vision.PVector;
  */
 public class Agent extends GameObject{
 	
-	int velX = 1;
-	int velY = 1;
+	int velX = 0;
+	int velY = 0;
 	
 	Algorithm algorithm = new Algorithm();
 	

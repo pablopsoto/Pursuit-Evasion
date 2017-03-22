@@ -29,7 +29,7 @@ public class Handler {
        for(GameObject o: getObjects()){
     	   o.render(g);
            if(o.getClass() == Agent.class){
-        	   o.visionStart(g, o.getX(), o.getY(), sceneLines, scanLines);
+        	   o.visionStart(g, o.getX() , o.getY()-30, sceneLines, scanLines);
            }
         	   
        }

@@ -1,6 +1,7 @@
 package main.display;
 
 import main.game.Game;
+import main.game.logic.KeyIn;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -23,10 +24,11 @@ public class Window extends Canvas {
         frame.add(game,BorderLayout.CENTER);
         frame.add(new MapPanel(game), BorderLayout.SOUTH);
         frame.add(new RegularPolygonPanel(game), BorderLayout.EAST);
-
+        frame.addKeyListener(new KeyIn(game));
 
 
         frame.setVisible(true);
+        frame.setFocusable(true);
         game.start();
 
     }

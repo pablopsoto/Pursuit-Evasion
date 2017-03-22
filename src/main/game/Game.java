@@ -31,6 +31,13 @@ public class Game extends Canvas implements Runnable{
     private Graphics g;
     private BufferStrategy bs;
     private Random random;
+
+    public Agent getAgent()
+    {
+        return agent;
+    }
+
+    private Agent agent;
     
     ExecutorService ex = Executors.newWorkStealingPool();
 
@@ -41,16 +48,16 @@ public class Game extends Canvas implements Runnable{
 
 //        handler.addObject(new Obstacle(150,150,4,50,handler));
         
-        this.addKeyListener(new KeyIn(handler));
+//        this.addKeyListener(new KeyIn(this));
         new Window(WIDTH, HEIGHT, "Pursuit-Evasion", this);
 
         random = new Random();
 
-        for (int i = 0; i <10; i++){
-            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8),10, handler));
+        for (int i = 0; i <5; i++){
+            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2, random.nextInt(8),30, handler));
         }
-
-        handler.addObject(new Agent(WIDTH/8, HEIGHT/8, 360, handler));
+        agent = new Agent(WIDTH/8, HEIGHT/8, 360, handler);
+        handler.addObject(agent);
         handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
 
 

@@ -42,7 +42,8 @@ public abstract class GameObject
             double a = i * angle;
             xPoints[i] = (int) (location.x + Math.cos(a) * radius);
             yPoints[i] = (int) (location.y + Math.sin(a) * radius);
-            if (i > 0)
+            if (i > 0 && id != ID.EVADOR && id!=ID.PURSUER)
+//            if (i > 0 )
             {
                 PVector start = new PVector(xPoints[i-1], yPoints[i-1]);
                 PVector end = new PVector(xPoints[i], yPoints[i]);
@@ -70,7 +71,8 @@ public abstract class GameObject
         {
             xPointsInt[i] = xPoints.get(i);
             yPointsInt[i] = yPoints.get(i);
-            if (i > 0)
+            if (i > 0 && id != ID.EVADOR && id!=ID.PURSUER)
+//            if (i > 0 )
             {
                 PVector start = new PVector(xPoints.get(i - 1), yPoints.get(i - 1));
                 PVector end = new PVector(xPoints.get(i), yPoints.get(i));
@@ -104,7 +106,7 @@ public abstract class GameObject
         {
             // System.out.println("NOT COLIDED");
         	setX(getX()+getVelX());
-       	   	setY(getX()+getVelY());   
+       	   	setY(getY()+getVelY());
         }
     }
 
