@@ -15,25 +15,32 @@ public class Handler implements java.io.Serializable{
     private ArrayList<GameObject> objects = new ArrayList<>();
     protected List<Line> sceneLines = new ArrayList<>();
     protected List<Line> scanLines = new ArrayList<>();
+    protected List<Line> agentLines = new ArrayList<>();
 
 
-     public synchronized void tick(){
+    public synchronized void tick(){
         for(GameObject o: getObjects()){
         	if(o.getClass() == Agent.class)
         		o.tick();
         }
     }
 
-     public synchronized void render(Graphics g){
-       
-       for(GameObject o: getObjects()){
-    	   o.render(g);
-           if(o.getClass() == Agent.class){
-        	   o.visionStart(g, o.getX() , o.getY(), sceneLines, scanLines);
-           }
-        	   
-       }
-        
+    public synchronized void render(Graphics g)
+    {
+        agentLines.clear();
+        for (GameObject o : getObjects())
+        {
+            o.render(g);
+
+            if (o.getClass() == Agent.class)
+            {
+                o.visionStart(g, o.getX(), o.getY(), sceneLines, scanLines, agentLines);
+
+            }
+
+
+        }
+
 //      startX+=0.1;
     }
 
@@ -67,4 +74,9 @@ public class Handler implements java.io.Serializable{
 	public void setObjects(ArrayList<GameObject> objects) {
 		this.objects = objects;
 	}
+
+    public List<Line> getAgentLines()
+    {
+        return agentLines;
+    }
 }
