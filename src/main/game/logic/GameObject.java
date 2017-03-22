@@ -1,5 +1,6 @@
 package main.game.logic;
 
+import main.vision.Algorithm;
 import main.vision.Line;
 import main.vision.PVector;
 import main.util.Location;
@@ -22,6 +23,7 @@ public abstract class GameObject
     protected Handler objectHandler;
     protected Handler agentHandler;
 
+    protected Algorithm algorithm = new Algorithm();
 
     public GameObject(int x, int y, int sides, int radius, ID id, Handler objectHandler)
     {

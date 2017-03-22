@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
+import main.game.Game;
 import main.game.logic.GameObject;
 import main.game.logic.Handler;
 import main.game.logic.ID;
@@ -19,16 +20,15 @@ public class Agent extends GameObject{
 	
 	int velX = 0;
 	int velY = 0;
-	
-	Algorithm algorithm = new Algorithm();
-	
+    double angle = 0;
 
-    public Agent(int x, int y, int sides, Handler handler) {
+
+    public Agent(int x, int y, int sides, Handler handler, Game game) {
         super(x, y, sides, 30, ID.PURSUER, handler);
     }
     
     public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines){
-        scanLines = algorithm.createScanLines(startX,startY);
+        scanLines = algorithm.createScanLines(startX,startY,angle);
         List<PVector> points = algorithm.getIntersectionPoints(scanLines, sceneLines);
         int count=0;
         g.setColor(Color.BLUE);
@@ -86,7 +86,15 @@ public class Agent extends GameObject{
     public void setVelY(int y){
     	this.velY = y;
     }
-    
-    
-    
+
+
+    public double getAngle()
+    {
+        return angle;
+    }
+
+    public void setAngle(double angle)
+    {
+        this.angle = angle;
+    }
 }

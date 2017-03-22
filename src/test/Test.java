@@ -23,12 +23,12 @@ public class Test {
         System.out.print(d);
     }
 
-    public void testCollision(){
+/*    public void testCollision(){
         Handler handler = new Handler();
-        GameObject agent = new Agent(50,300,3, handler);
+//        GameObject agent = new Agent(50,300,3, handler,new Game game);
         GameObject obstacle = new Obstacle(75, 300, 4,30, handler);
 
-        handler.addObject(agent);
+//        handler.addObject(agent);
         handler.addObject(obstacle);
 
         if(agent.collided(handler)){
@@ -36,7 +36,7 @@ public class Test {
         } else {
             System.out.println("Didn't collide");
         }
-    }
+    }*/
 
     public void testCanvas(){
         new Game();

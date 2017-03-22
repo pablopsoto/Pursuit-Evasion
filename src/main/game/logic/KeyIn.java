@@ -1,6 +1,7 @@
 package main.game.logic;
 
 import main.game.Game;
+import main.game.agent.Agent;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,17 +22,16 @@ public class KeyIn extends KeyAdapter {
         int key = e.getKeyChar();
         System.out.println(e.getKeyChar());
 
-
+        Agent a = game.getAgent();
 
                 if(key == 'a'){
 //                    game.getAgent().setVelX(game.getAgent().getVelX()+1);
-                    game.getAgent().setX(game.getAgent().getX()-1);
-                    System.out.println("Posx" + game.getAgent().posX);
+                    a.setX(a.getX()-1);
                 }
 
 
                 if(key == 'd'){
-                    game.getAgent().setX(game.getAgent().getX()+1);
+                    a.setX(a.getX()+1);
                 }
 
                 if(key == 'w'){
@@ -40,6 +40,10 @@ public class KeyIn extends KeyAdapter {
 
                 if(key == 's'){
                     game.getAgent().setY(game.getAgent().getY()+1);
+                }
+
+                if(key == KeyEvent.KEY_LOCATION_LEFT){
+                   a.setAngle(a.getAngle()-1);
                 }
 
 

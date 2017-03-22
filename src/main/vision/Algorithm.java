@@ -5,25 +5,15 @@ import java.util.List;
 
 public class Algorithm {
 
-	public void setAngle1(double angle1)
-	{
-		this.angle1 = angle1;
-	}
-
-	public double getAngle1()
-	{
-		return angle1;
-	}
-
 	/*
              * Sweep around the given circle with the given distance and create the scan lines
              * @param startX
              * @param startY
              * @return
              */
-	private double angle1=0;
 
-	public List<Line> createScanLines(double startX, double startY) {
+
+	public List<Line> createScanLines(double startX, double startY, double angle1) {
 		List<Line> scanLines;
 
 		double angleStart = 0 + angle1* 2*Math.PI;
