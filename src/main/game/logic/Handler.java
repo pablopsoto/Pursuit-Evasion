@@ -10,7 +10,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Handler {
+public class Handler
+{
 
     private ArrayList<GameObject> objects = new ArrayList<>();
     protected List<Line> sceneLines = new ArrayList<>();
@@ -19,10 +20,12 @@ public class Handler {
     protected List<Agent> agents = new ArrayList<>();
 
 
-    public synchronized void tick(){
-        for(GameObject o: getObjects()){
-        	if(o.getClass() == Agent.class)
-        		o.tick();
+    public synchronized void tick()
+    {
+        for (GameObject o : getObjects())
+        {
+            if (o.getClass() == Agent.class)
+                o.tick();
         }
     }
 
@@ -35,24 +38,27 @@ public class Handler {
 
             if (o.getClass() == Agent.class)
             {
-                agents.add((Agent)o);
+                agents.add((Agent) o);
             }
 
 
         }
-        for(Agent a: agents){
-        a.visionStart(g, a.getX(), a.getY(), sceneLines, scanLines, agentLines);
+        for (Agent a : agents)
+        {
+            a.visionStart(g, a.getX(), a.getY(), sceneLines, scanLines, agentLines);
         }
         agents.clear();
 
 //      startX+=0.1;
     }
 
-    public synchronized void addObject(GameObject object){
+    public synchronized void addObject(GameObject object)
+    {
         getObjects().add(object);
     }
 
-    public synchronized void removeObject(GameObject object){
+    public synchronized void removeObject(GameObject object)
+    {
         getObjects().remove(object);
     }
 
@@ -71,13 +77,15 @@ public class Handler {
         this.scanLines = scanLines;
     }
 
-	public ArrayList<GameObject> getObjects() {
-		return objects;
-	}
+    public ArrayList<GameObject> getObjects()
+    {
+        return objects;
+    }
 
-	public void setObjects(ArrayList<GameObject> objects) {
-		this.objects = objects;
-	}
+    public void setObjects(ArrayList<GameObject> objects)
+    {
+        this.objects = objects;
+    }
 
     public List<Line> getAgentLines()
     {

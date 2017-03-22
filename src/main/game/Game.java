@@ -60,13 +60,12 @@ public class Game extends Canvas implements Runnable{
         for (int i = 0; i <0; i++){
             handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler,ID_GENERATOR.getAndIncrement()));
         }
-        handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler,ID_GENERATOR.getAndIncrement()));
         agent = new Agent(WIDTH/8, HEIGHT/8, 360, handler,this,ID_GENERATOR.getAndIncrement());
         agent2 = new Agent(WIDTH/10, HEIGHT/8, 360, handler,this,ID_GENERATOR.getAndIncrement());
         handler.addObject(agent);
         handler.addObject(agent2);
 
-
+        handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler,ID_GENERATOR.getAndIncrement()));
 
 
 

@@ -28,8 +28,8 @@ public class Agent extends GameObject{
 
 
 
-    public Agent(int x, int y, int sides, Handler handler,ID id, Game game, int objectID) {
-        super(x, y, sides, 10, id, handler,objectID);
+    public Agent(int x, int y, int sides, Handler handler, Game game, int objectID) {
+        super(x, y, sides, 10, ID.PURSUER, handler,objectID);
 
     }
     private Algorithm algorithm = new Algorithm();
