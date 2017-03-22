@@ -26,7 +26,7 @@ package main.vision;
 	Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
 	Boston, MA  02111-1307  USA 
 */ 
-public class PVector { 
+public class PVector implements java.io.Serializable {
  
   /** The x component of the vector. */ 
   public double x; 

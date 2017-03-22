@@ -187,4 +187,7 @@ public class Game extends Canvas implements Runnable{
     {
         return handler;
     }
+    public void setHandler(Handler h){
+        this.handler = h;
+    }
 }

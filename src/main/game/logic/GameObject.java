@@ -10,7 +10,7 @@ import java.awt.geom.Area;
 import java.util.*;
 import java.util.List;
 
-public abstract class GameObject
+public abstract class GameObject implements java.io.Serializable
 {
 
     protected Location location;
@@ -25,6 +25,9 @@ public abstract class GameObject
 
     protected Algorithm algorithm = new Algorithm();
 
+    public void setHandler(Handler h){
+        this.objectHandler = h;
+    }
     public GameObject(int x, int y, int sides, int radius, ID id, Handler objectHandler)
     {
         location = new Location(x, y);

@@ -3,7 +3,7 @@ package main.vision;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Algorithm {
+public class Algorithm implements java.io.Serializable{
 
 	/*
              * Sweep around the given circle with the given distance and create the scan lines

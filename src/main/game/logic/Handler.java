@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Handler {
+public class Handler implements java.io.Serializable{
 
     private ArrayList<GameObject> objects = new ArrayList<>();
     protected List<Line> sceneLines = new ArrayList<>();

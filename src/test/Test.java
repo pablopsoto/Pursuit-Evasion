@@ -8,6 +8,7 @@ import main.util.Location;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 public class Test {
 
@@ -22,6 +23,43 @@ public class Test {
         float d = Location.distance(a,b);
         System.out.print(d);
     }
+
+//    @org.junit.Test
+//    public void testSave(){
+//        Handler h = new Handler();
+//        h.addObject(new Agent(100, 200, 4, h));
+//        h.addObject(new Obstacle(450, 1, 8, 30, h));
+//
+//        FileOutputStream fos;
+//        ObjectOutputStream oos;
+//        FileInputStream fis;
+//        ObjectInputStream ois;
+//
+//        Handler handler;
+//        try {
+//            fos = new FileOutputStream("t.tmp");
+//            oos = new ObjectOutputStream(fos);
+//
+//
+//            oos.writeObject(h);
+//            oos.close();
+//
+//            fis = new FileInputStream("t.tmp");
+//            ois = new ObjectInputStream(fis);
+//
+//            handler = (Handler) ois.readObject();
+//
+//            System.out.println(handler.toString());
+//
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 /*    public void testCollision(){
         Handler handler = new Handler();

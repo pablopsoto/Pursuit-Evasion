@@ -1,7 +1,7 @@
 package main.util;
 
 
-public class Location {
+public class Location implements java.io.Serializable {
 
     public float x, y;
 

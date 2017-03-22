@@ -1,7 +1,7 @@
 package main.vision;
 
 
-public class Line {
+public class Line implements java.io.Serializable{
 
 	PVector start;
 	PVector end;
