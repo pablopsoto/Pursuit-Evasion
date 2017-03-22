@@ -50,14 +50,7 @@ public class RegularPolygonPanel extends JPanel
         RegularPolygonEditor.addActionListener(new EditActionListener());
 
     }
-    public static void FinishText(){
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                JOptionPane.showMessageDialog(null, "Evader was caught", "Finish",JOptionPane.PLAIN_MESSAGE);
-            }
-        });
-        t.start();
-    }
+
 
     private class EditActionListener implements ActionListener
     {

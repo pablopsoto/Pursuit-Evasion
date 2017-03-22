@@ -232,7 +232,6 @@ public class Algorithm implements java.io.Serializable
 //                System.out.println("GOT CAUGHT");
 //                System.out.println("ID = " + lineB.getID());
 
-                    //RegularPolygonPanel.FinishText();
 
             }
 
