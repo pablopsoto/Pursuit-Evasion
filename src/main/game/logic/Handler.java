@@ -90,4 +90,11 @@ public class Handler implements java.io.Serializable{
     {
         return agentLines;
     }
+
+    public void delete(int objectID) {
+        for(int i =0; i<objects.size();i++){
+            if(objects.get(i).getObjectID()==objectID)objects.remove(i);
+
+        }
+    }
 }

@@ -4,6 +4,7 @@ import main.game.Game;
 import main.game.obstacle.IrregularObstacle;
 import main.game.obstacle.Obstacle;
 import main.mapEditor.regularEditor;
+import main.vision.Algorithm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,11 +21,13 @@ public class RegularPolygonPanel extends JPanel
     private JTextField sizeTextField = new JTextField("20");
     JLabel sidesLabel = new JLabel("Sides = ");
     JLabel sizeLabel = new JLabel("Size = ");
+    JLabel finish = new JLabel("Evader was caught!");
 
     regularEditor editor;
 
     JButton RegularPolygonEditor = new JButton("Regular polgyon editor");
     JButton addRegularPolygon = new JButton("Add regular polgyon");
+
     public RegularPolygonPanel(Game game){
         this.game =game;
         editor = new regularEditor(game);
@@ -46,6 +49,14 @@ public class RegularPolygonPanel extends JPanel
         addRegularPolygon.addActionListener(new AddActionListener());
         RegularPolygonEditor.addActionListener(new EditActionListener());
 
+    }
+    public static void FinishText(){
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                JOptionPane.showMessageDialog(null, "Evader was caught", "Finish",JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        t.start();
     }
 
     private class EditActionListener implements ActionListener
