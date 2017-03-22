@@ -2,6 +2,7 @@ package main.display;
 
 import main.game.Game;
 import main.game.agent.Agent;
+import main.game.agent.Evader;
 import main.game.agent.Pursuer;
 import main.game.logic.GameObject;
 import main.game.logic.Handler;
@@ -45,12 +46,14 @@ public class MapPanel extends JPanel
             this.add(polygonButton);
             this.add(addPolygon);
             this.add(addPursuer);
+            this.add(addEvador);
             //save and load
             this.add(save);
             this.add(load);
             save.addActionListener(new SaveActionListener());
             load.addActionListener(new LoadActionListener());
             addPursuer.addActionListener(new PursuerActionListener());
+            addEvador.addActionListener(new EvaderActionListener());
 
             this.add(start);
             this.add(stop);
@@ -84,13 +87,26 @@ public class MapPanel extends JPanel
             game.stop();
         }
     }
+    private class EvaderActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Add Evader Button Pressed");
+            Agent agent = new Evader(r.nextInt(480)+20, r.nextInt(480)+20, 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
+            game.getHandler().addObject(agent);
+
+            //game.render();
+        }
+
+    }
     private class PursuerActionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add Pursuer Button Pressed");
-            Agent agent = new Pursuer(r.nextInt(480)+20, r.nextInt(480)+20, 360, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
+            Agent agent = new Pursuer(r.nextInt(480)+20, r.nextInt(480)+20, 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
             game.getHandler().addObject(agent);
 
             //game.render();

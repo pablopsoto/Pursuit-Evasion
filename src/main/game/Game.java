@@ -163,7 +163,6 @@ public class Game extends Canvas implements Runnable{
 
     public void stop(){
         try{
-            //thread.join();
             running = false;
         }catch (Exception e){
             e.printStackTrace();
