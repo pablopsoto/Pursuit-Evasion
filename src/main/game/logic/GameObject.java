@@ -145,7 +145,8 @@ public abstract class GameObject {
 
     public Polygon rotatedPolygon(double theta, Polygon polygon){
 
-        //TODO: it rotates in the origin, not the polygon
+        //TODO: use allX and allY locations to do ratation on the polygon
+        //TODO: feel free to re write this part
 
         int[] xs = polygon.xpoints;
         int[] ys = polygon.ypoints;
