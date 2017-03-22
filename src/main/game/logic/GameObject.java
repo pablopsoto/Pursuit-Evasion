@@ -10,13 +10,21 @@ import java.util.ArrayList;
 
 public abstract class GameObject {
 
+    protected int[] allX = new int[360*4];
+    protected int[] allY = new int[360*4];
+
     protected Location location;
     protected ID id;
     protected int velX, velY;
     protected double rotation;
     protected int sides;
     protected Polygon polygon;
+    protected Polygon fullPolygon;
     protected Handler handler;
+
+    private int pointer;
+    private double shift;
+
     public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
 
         location = new Location(x,y);
@@ -27,13 +35,25 @@ public abstract class GameObject {
         int[] xPoints = new int[sides];
         int[] yPoints = new int[sides];
 
-        double angle = 2 * Math.PI / sides;
+        double ang = 2 * Math.PI / 360 * 4;
+
+        for (int i = 0; i < 360 * 4; i++){
+            double an = i * ang;
+            allX[i] = (int)(location.x + Math.cos(an) * radius);
+            allY[i] = (int)(location.y + Math.sin(an) * radius);
+        }
+
+        fullPolygon = new Polygon(allX, allY, allX.length);
+
+        shift = 1440/ sides;
 
         for (int i = 0; i < sides; i++){
-            double a = i * angle;
-            xPoints[i] = (int)(location.x + Math.cos(a) * radius);
-            yPoints[i] = (int)(location.y + Math.sin(a) * radius);
+
+            xPoints[i] = allX[(int)shift * i];
+            yPoints[i] = allY[(int)shift * i];
         }
+
+        pointer = 0;
 
         polygon = new Polygon(xPoints, yPoints, sides);
 
@@ -67,6 +87,8 @@ public abstract class GameObject {
         applyVelocities();
 
         polygon.translate(velX, velY);
+        fullPolygon.translate(velX, velY);
+
         location.x += velX;
         location.y += velY;
 
@@ -127,16 +149,21 @@ public abstract class GameObject {
 
         int[] xs = polygon.xpoints;
         int[] ys = polygon.ypoints;
-        int x = (int) location.x;
-        int y = (int) location.y;
 
-        for (int i = 0; i < xs.length; i++){
-            Location temp = new Location(xs[i], ys[i]);
+        if(pointer >= shift-1 && theta > 0){
+            for (int i = 0; i < sides; i++){
+                xs[i] = allX[(int)shift * i];
+                ys[i] = allY[(int)shift * i];
+            }
+            pointer = 0;
+        } else if(pointer == 0 && theta<0){
+            for (int i = sides - 1; i < 0; i--){
+                xs[sides - i -1] = allX[(int)shift * i];
+                ys[sides - i -1] = allY[(int)shift * i];
+            }
+            pointer = (int) shift - 1;
+        } else if(theta == 1){
 
-            rotationPoint(location, temp, theta);
-
-            xs[i] = (int) temp.x;
-            ys[i] = (int) temp.y;
         }
 
         Polygon p = new Polygon(xs, ys, xs.length);
@@ -153,6 +180,10 @@ public abstract class GameObject {
 
         point.x = (float)x2 + origin.x;
         point.y = (float)y2 + origin.y;
+    }
+
+    private void updateAllPoints(int sides, int pointer){
+
     }
 
     public abstract void applyVelocities();
