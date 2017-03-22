@@ -59,7 +59,7 @@ public class MapPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add Agents Button Pressed");
-            Agent agent = new Agent(r.nextInt(500), r.nextInt(500), 360, game.getHandler(),game);
+            Agent agent = new Agent(r.nextInt(500), r.nextInt(500), 360, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
             game.getHandler().addObject(agent);
         }
     }

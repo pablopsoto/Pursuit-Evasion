@@ -1,10 +1,7 @@
 package main.vision;
-
-
-public class Line implements java.io.Serializable{
 import main.game.logic.ID;
 
-public class Line {
+public class Line implements java.io.Serializable{
 
 	public int getObjectID()
 	{

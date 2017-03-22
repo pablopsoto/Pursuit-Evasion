@@ -5,8 +5,12 @@ import main.vision.Line;
 import main.vision.PVector;
 import main.util.Location;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Area;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -66,6 +70,8 @@ public abstract class GameObject implements java.io.Serializable
         PVector start = new PVector(xPoints[sides-1], yPoints[sides-1]);
         PVector end = new PVector(xPoints[0], yPoints[0]);
         objectHandler.getSceneLines().add(new Line(start,end,id));}
+
+        ImageIcon image = new ImageIcon("jan.jpg");
 
         polygon = new Polygon(xPoints, yPoints, sides);
 
@@ -142,7 +148,7 @@ public abstract class GameObject implements java.io.Serializable
             g.setColor(Color.CYAN);
         } else if (id == ID.PURSUER)
         {
-            g.setColor(Color.RED);
+            g.setColor(Color.GREEN);
             renderPoints(polygon.xpoints,polygon.ypoints);
 
         } else if (id == ID.OBSTACLE)
