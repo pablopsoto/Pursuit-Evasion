@@ -1,5 +1,7 @@
 package main.vision;
 
+import main.display.RegularPolygonPanel;
+import main.game.logic.Handler;
 import main.game.logic.ID;
 
 import java.util.ArrayList;
@@ -7,9 +9,13 @@ import java.util.List;
 
 public class Algorithm implements java.io.Serializable
 {
+    private  Handler handler;
     private int objectID;
     private ID agentID;
 
+    public Algorithm(Handler handler){
+        this.handler=handler;
+    }
 	/*
              * Sweep around the given circle with the given distance and create the scan lines
              * @param startX
@@ -222,9 +228,14 @@ public class Algorithm implements java.io.Serializable
             }
             if (lineB.getID() == ID.EVADER && agentID == ID.PURSUER)
             {
+                handler.delete(lineB.getObjectID());
 //                System.out.println("GOT CAUGHT");
 //                System.out.println("ID = " + lineB.getID());
+
+
             }
+
+
             return new PVector(x1 + t * ax, y1 + t * ay);
         }
     }

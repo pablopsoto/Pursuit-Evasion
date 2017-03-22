@@ -32,10 +32,10 @@ public class Agent extends GameObject
     public Agent(int x, int y, int sides, Handler handler,ID id,  Game game, int objectID)
     {
         super(x, y, sides, 15, id, handler, objectID);
-
+       algorithm = new Algorithm(objectHandler);
     }
 
-    private Algorithm algorithm = new Algorithm();
+    private Algorithm algorithm;
 
     public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLinesOld, List<Line> scanLines,
                             List<Line> agentLines)
