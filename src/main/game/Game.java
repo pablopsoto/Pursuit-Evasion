@@ -71,7 +71,6 @@ public class Game extends Canvas implements Runnable{
 
 
         addSides();
-      
 
 
 //        gc = window.getGraphics();
@@ -160,7 +159,7 @@ public class Game extends Canvas implements Runnable{
 
     public void stop(){
         try{
-            thread.join();
+            //thread.join();
             running = false;
         }catch (Exception e){
             e.printStackTrace();
@@ -171,7 +170,7 @@ public class Game extends Canvas implements Runnable{
         handler.tick();
     }
 
-    private void render()
+    public void render()
     {    	
         bs = this.getBufferStrategy();
         if (bs == null)

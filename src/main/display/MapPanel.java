@@ -2,6 +2,7 @@ package main.display;
 
 import main.game.Game;
 import main.game.agent.Agent;
+import main.game.agent.Pursuer;
 import main.game.logic.GameObject;
 import main.game.logic.Handler;
 import main.game.obstacle.IrregularObstacle;
@@ -27,7 +28,13 @@ public class MapPanel extends JPanel
     JButton polygonButton = new JButton("Polygon editor");
     JButton addPolygon = new JButton("Add polygon");
 
-    JButton addAgents = new JButton("Add agents");
+    JButton addPursuer = new JButton("Add pursuer");
+    JButton addEvador  = new JButton("Add Evador");
+    //MAKE EVADOR BUTTON BROH
+
+
+    JButton start = new JButton("start");
+    JButton stop = new JButton("stop");
 
     //save and load
     JButton save = new JButton("save");
@@ -37,13 +44,18 @@ public class MapPanel extends JPanel
         public MapPanel(Game game){
             this.add(polygonButton);
             this.add(addPolygon);
-            this.add(addAgents);
+            this.add(addPursuer);
             //save and load
             this.add(save);
             this.add(load);
             save.addActionListener(new SaveActionListener());
             load.addActionListener(new LoadActionListener());
-            addAgents.addActionListener(new AddAgentsActionListener());
+            addPursuer.addActionListener(new PursuerActionListener());
+
+            this.add(start);
+            this.add(stop);
+            start.addActionListener(new StartActionListener());
+            stop.addActionListener(new StopActionListener());
 
             addPolygon.setEnabled(false);
             polygonButton.addActionListener(new EditorActionListener());
@@ -52,16 +64,38 @@ public class MapPanel extends JPanel
             this.game = game;
             editor = new MapEditor(game);
 
+            //game.render();
         }
-    private class AddAgentsActionListener implements ActionListener
+    private class StartActionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Add Agents Button Pressed");
-            Agent agent = new Agent(r.nextInt(500), r.nextInt(500), 360, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
-            game.getHandler().addObject(agent);
+            System.out.println("Start Button Pressed");
+            game.start();
         }
+    }
+    private class StopActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Stop Button Pressed");
+            game.stop();
+        }
+    }
+    private class PursuerActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("Add Pursuer Button Pressed");
+            Agent agent = new Pursuer(r.nextInt(500), r.nextInt(500), 360, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
+            game.getHandler().addObject(agent);
+
+            //game.render();
+        }
+
     }
     private class SaveActionListener implements ActionListener
     {
@@ -136,6 +170,8 @@ public class MapPanel extends JPanel
 
             addPolygon.setEnabled(false);
             polygonButton.setEnabled(true);
+
+            game.render();
         }
     }
 
