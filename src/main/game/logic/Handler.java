@@ -23,7 +23,7 @@ public class Handler implements java.io.Serializable{
     {
         for (GameObject o : getObjects())
         {
-            if (o.getClass() == Agent.class)
+            if (o instanceof Agent)
                 o.tick();
         }
     }
@@ -35,13 +35,14 @@ public class Handler implements java.io.Serializable{
         {
             o.render(g);
 
-            if (o.getClass() == Agent.class)
+            if (o instanceof Agent)
             {
                 agents.add((Agent) o);
             }
 
 
         }
+        System.out.println(agents);
         for (Agent a : agents)
         {
             a.visionStart(g, a.getX(), a.getY(), sceneLines, scanLines, agentLines);

@@ -8,6 +8,7 @@ import java.util.List;
 public class Algorithm implements java.io.Serializable
 {
     private int objectID;
+    private ID agentID;
 
 	/*
              * Sweep around the given circle with the given distance and create the scan lines
@@ -17,11 +18,12 @@ public class Algorithm implements java.io.Serializable
              */
 
 
-    public List<Line> createScanLines(double startX, double startY, double angle1, int objectID)
+    public List<Line> createScanLines(double startX, double startY, double angle1, int objectID, ID agentID)
     {
 
         List<Line> scanLines;
         this.objectID = objectID;
+        this.agentID = agentID;
 //        System.out.println("CreateScanLines = " + objectID);
         double angleStart = 0 + angle1 * 2 * Math.PI;
         double angleEnd = (angle1 * Math.PI * 2) + 0.5 * Math.PI;
@@ -49,7 +51,7 @@ public class Algorithm implements java.io.Serializable
     }
 
 /*
-	 * Get all the intersecting points for the given scan lines and the given scene lines.
+     * Get all the intersecting points for the given scan lines and the given scene lines.
      *
 	 * @param scanLines
 	 * @param sceneLines
@@ -175,11 +177,11 @@ public class Algorithm implements java.io.Serializable
 
     private PVector getLineIntersection(Line lineA, Line lineB)
     {
-        if(lineB.getObjectID()==objectID)
+        if (lineB.getObjectID() == objectID)
         {
 //            System.out.println("RETURNING NULL = ");
             return null;
-        }else
+        } else
         {
             double x1 = lineA.getStart().x;
             double y1 = lineA.getStart().y;
@@ -213,13 +215,18 @@ public class Algorithm implements java.io.Serializable
             if (u < 0 || u > 1)
                 return null;
 
-            if (lineB.getID() == ID.PURSUER)
+            if (lineB.getID() == ID.PURSUER && agentID == ID.EVADER)
             {
+                System.out.println("RUN AWAY!!!!");
 //                System.out.println("ID = " + lineB.getID());
-
+            }
+            if (lineB.getID() == ID.EVADER && agentID == ID.PURSUER)
+            {
+                System.out.println("GOT CAUGHT");
+//                System.out.println("ID = " + lineB.getID());
             }
             return new PVector(x1 + t * ax, y1 + t * ay);
         }
-}
+    }
 
 }

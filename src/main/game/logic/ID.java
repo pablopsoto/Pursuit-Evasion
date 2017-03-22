@@ -5,6 +5,6 @@ package main.game.logic;
  */
 public enum ID {
 
-    PURSUER, EVADOR, OBSTACLE, VISION,NEUTRAL
+    PURSUER, EVADER, OBSTACLE, VISION,NEUTRAL
 
 }
