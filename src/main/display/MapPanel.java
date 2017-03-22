@@ -90,7 +90,7 @@ public class MapPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add Pursuer Button Pressed");
-            Agent agent = new Pursuer(r.nextInt(480)+20, r.nextInt(480)+20, 360, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
+            Agent agent = new Pursuer(r.nextInt(480)+20, r.nextInt(480)+20, 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
             game.getHandler().addObject(agent);
 
             //game.render();
