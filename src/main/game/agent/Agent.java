@@ -1,7 +1,10 @@
 package main.game.agent;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.sun.corba.se.impl.orbutil.graph.Graph;
 import main.game.Game;
@@ -24,12 +27,18 @@ public class Agent extends GameObject{
     double angle = 0;
 
 
-    public Agent(int x, int y, int sides, Handler handler, Game game) {
-        super(x, y, sides, 10, ID.PURSUER, handler);
+
+    public Agent(int x, int y, int sides, Handler handler, Game game, int objectID) {
+        super(x, y, sides, 10, ID.PURSUER, handler,objectID);
+
     }
-    
-    public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines){
-        scanLines = algorithm.createScanLines(startX,startY,angle);
+    private Algorithm algorithm = new Algorithm();
+    public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLinesOld, List<Line> scanLines, List<Line> agentLines){
+        scanLines = this.algorithm.createScanLines(startX,startY,angle, this.getObjectID());
+        List<Line> sceneLines= new ArrayList<Line>();
+        sceneLines.addAll(sceneLinesOld);
+        sceneLines.addAll(agentLines);
+
         List<PVector> points = algorithm.getIntersectionPoints(scanLines, sceneLines);
         int count=0;
         Graphics2D g2 = (Graphics2D) g;
@@ -81,7 +90,9 @@ public class Agent extends GameObject{
     public void setVelX(int x){
     	this.velX = x;
     }
-    
+
+
+
     public int getVelY(){
     	return velY;
     }

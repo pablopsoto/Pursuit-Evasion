@@ -13,8 +13,8 @@ import main.vision.Line;
  */
 public class Obstacle extends GameObject {
 
-    public Obstacle(int x, int y, int sides,int radius, Handler handler) {
-        super(x, y, sides, radius, ID.OBSTABLE, handler);
+    public Obstacle(int x, int y, int sides,int radius, Handler handler,int objectID) {
+        super(x, y, sides, radius, ID.OBSTACLE, handler,objectID);
     }
 
     @Override
@@ -53,8 +53,10 @@ public class Obstacle extends GameObject {
 	}
 
 	@Override
-	public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines) {
-		// TODO Auto-generated method stub
-		
+	public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines, List<Line> agentLines)
+	{
+
 	}
+
+
 }

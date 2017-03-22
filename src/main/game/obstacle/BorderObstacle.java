@@ -13,8 +13,8 @@ import java.util.List;
  * Created by Jeroen on 13/03/2017.
  */
 public class BorderObstacle extends GameObject{
-        public BorderObstacle(int x, int y, int sides, Handler handler, ArrayList<Integer> xPoints, ArrayList<Integer> yPoints){
-            super(x,y,sides, ID.OBSTABLE,handler,xPoints,yPoints);
+        public BorderObstacle(int x, int y, int sides, Handler handler, ArrayList<Integer> xPoints, ArrayList<Integer> yPoints,int objectID){
+            super(x,y,sides, ID.OBSTACLE,handler,xPoints,yPoints,objectID);
         }
 
         @Override
@@ -52,10 +52,11 @@ public class BorderObstacle extends GameObject{
 			
 		}
 
-		@Override
-		public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines) {
-			// TODO Auto-generated method stub
-			
-		}
+	@Override
+	public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines, List<Line> agentLines)
+	{
+
+	}
+
 
 }

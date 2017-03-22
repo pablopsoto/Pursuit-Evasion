@@ -1,9 +1,13 @@
 package main.vision;
 
+import main.game.logic.ID;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Algorithm {
+public class Algorithm
+{
+    private int objectID;
 
 	/*
              * Sweep around the given circle with the given distance and create the scan lines
@@ -13,33 +17,37 @@ public class Algorithm {
              */
 
 
-	public List<Line> createScanLines(double startX, double startY, double angle1) {
-		List<Line> scanLines;
+    public List<Line> createScanLines(double startX, double startY, double angle1, int objectID)
+    {
 
-		double angleStart = 0 + angle1* 2*Math.PI;
-		double angleEnd = (angle1*Math.PI*2) + 0.5*Math.PI;
-		double step = Math.PI / Settings.get().getScanLineCount();
-		
-		scanLines = new ArrayList<>();
-		scanLines.add(new Line( new PVector( startX, startY),new PVector( startX, startY)));
-		
-		PVector scanLine = new PVector( startX, startY);
-		double scanLineLength = Settings.get().getScanLineLength();
-		
-		for( double angle = angleStart; angle < angleEnd; angle += step) {
+        List<Line> scanLines;
+        this.objectID = objectID;
+//        System.out.println("CreateScanLines = " + objectID);
+        double angleStart = 0 + angle1 * 2 * Math.PI;
+        double angleEnd = (angle1 * Math.PI * 2) + 0.5 * Math.PI;
+        double step = Math.PI / Settings.get().getScanLineCount();
 
-			double x = scanLine.x + Math.cos(angle) * scanLineLength;
-			double y = scanLine.y + Math.sin(angle) * scanLineLength;
-			
-			Line line = new Line( scanLine, new PVector( x, y));
-			
-			scanLines.add( line);
+        scanLines = new ArrayList<>();
+        scanLines.add(new Line(new PVector(startX, startY), new PVector(startX, startY), null));
 
-		}
-		
-		return scanLines;
-	}
-	
+        PVector scanLine = new PVector(startX, startY);
+        double scanLineLength = Settings.get().getScanLineLength();
+
+        for (double angle = angleStart; angle < angleEnd; angle += step)
+        {
+
+            double x = scanLine.x + Math.cos(angle) * scanLineLength;
+            double y = scanLine.y + Math.sin(angle) * scanLineLength;
+
+            Line line = new Line(scanLine, new PVector(x, y), null);
+
+            scanLines.add(line);
+
+        }
+
+        return scanLines;
+    }
+
 /*
 	 * Get all the intersecting points for the given scan lines and the given scene lines.
      *
@@ -48,41 +56,46 @@ public class Algorithm {
 	 * @return
 */
 
-	public List<PVector> getIntersectionPoints(List<Line> scanLines, List<Line> sceneLines) {
+    public List<PVector> getIntersectionPoints(List<Line> scanLines, List<Line> sceneLines)
+    {
 
-		List<PVector> points = new ArrayList<>();
+        List<PVector> points = new ArrayList<>();
 
-		for (Line scanLine : scanLines) {
+        for (Line scanLine : scanLines)
+        {
 
-			List<PVector> intersections = getIntersections(scanLine, sceneLines);
+            List<PVector> intersections = getIntersections(scanLine, sceneLines);
 
-			double x = 0;
-			double y = 0;
-			double dist = Double.MAX_VALUE;
-			
-			// find the intersection that is closest to the scanline
-			if (intersections.size() > 0) {
+            double x = 0;
+            double y = 0;
+            double dist = Double.MAX_VALUE;
 
-				for (PVector item : intersections) {
+            // find the intersection that is closest to the scanline
+            if (intersections.size() > 0)
+            {
 
-					double currDist = scanLine.getStart().dist(item);
+                for (PVector item : intersections)
+                {
 
-					if (currDist < dist) {
-						x = item.x;
-						y = item.y;
+                    double currDist = scanLine.getStart().dist(item);
 
-						dist = currDist;
+                    if (currDist < dist)
+                    {
+                        x = item.x;
+                        y = item.y;
 
-					}
-				}
+                        dist = currDist;
 
-				points.add(new PVector(x, y));
-			}
+                    }
+                }
 
-		}
+                points.add(new PVector(x, y));
+            }
 
-		return points;
-	}
+        }
+
+        return points;
+    }
 
 /*
 	 * Find intersecting lines
@@ -91,97 +104,122 @@ public class Algorithm {
 	 * @return
 */
 
-	public List<PVector> getIntersections(Line scanLine, List<Line> sceneLines) {
+    public List<PVector> getIntersections(Line scanLine, List<Line> sceneLines)
+    {
 
-		List<PVector> list = new ArrayList<>();
+        List<PVector> list = new ArrayList<>();
 
-		PVector intersection;
+        PVector intersection = null;
+        for (Line line : sceneLines)
+        {
 
-		for (Line line : sceneLines) {
+//				System.out.println("ObjectID " + objectID);
+//				System.out.println("ObjectID line " + line.getObjectID());
+            // check if 2 lines intersect
+            intersection = getLineIntersection(scanLine, line);
 
-			// check if 2 lines intersect
-			intersection = getLineIntersection(scanLine, line);
 
-			// lines intersect => we have an end point
-			PVector end = null;
-			if (intersection != null) {
+            // lines intersect => we have an end point
+            PVector end = null;
+            if (intersection != null)
+            {
 
-				end = new PVector(intersection.x, intersection.y);
+                end = new PVector(intersection.x, intersection.y);
 
-			}
+            }
 
-			// check if the intersection area should be limited to a visible area
-			if (Settings.get().isLimitToScanLineLength()) {
+            // check if the intersection area should be limited to a visible area
+            if (Settings.get().isLimitToScanLineLength())
+            {
 
-				// maximum scan line length
-				double maxLength = Settings.get().getScanLineLength();
+                // maximum scan line length
+                double maxLength = Settings.get().getScanLineLength();
 
-				PVector start = scanLine.getStart();
+                PVector start = scanLine.getStart();
 
-				// no intersection found => full scan line length
-				if (end == null) {
+                // no intersection found => full scan line length
+                if (end == null)
+                {
 
-					end = new PVector(scanLine.getEnd().x, scanLine.getEnd().y);
+                    end = new PVector(scanLine.getEnd().x, scanLine.getEnd().y);
 
-				}
-				// intersection found => limit to scan line length
-				else if (start.dist(end) > maxLength) {
+                }
+                // intersection found => limit to scan line length
+                else if (start.dist(end) > maxLength)
+                {
 
-					end.normalize();
-					end.mult(maxLength);
+                    end.normalize();
+                    end.mult(maxLength);
 
-				}
+                }
 
-			}
+            }
 
-			// we have a valid line end, either an intersection with another line or we have the scan line limit
-			if (end != null) {
-				list.add(end);
-			}
+            // we have a valid line end, either an intersection with another line or we have the scan line limit
+            if (end != null)
+            {
+                list.add(end);
+            }
 
-		}
+        }
 
-		return list;
-	}
 
-	// find intersection point of 2 line segments
-	//
-	// http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
-	// http://www.openprocessing.org/sketch/135314
-	// http://www-cs.ccny.cuny.edu/~wolberg/capstone/intersection/Intersection%20point%20of%20two%20lines.html
-	private PVector getLineIntersection(Line lineA, Line lineB) {
-		double x1 = lineA.getStart().x;
-		double y1 = lineA.getStart().y;
-		double x2 = lineA.getEnd().x;
-		double y2 = lineA.getEnd().y;
+        return list;
+    }
 
-		double x3 = lineB.getStart().x;
-		double y3 = lineB.getStart().y;
-		double x4 = lineB.getEnd().x;
-		double y4 = lineB.getEnd().y;
+    // find intersection point of 2 line segments
+    //
+    // http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
+    // http://www.openprocessing.org/sketch/135314
+    // http://www-cs.ccny.cuny.edu/~wolberg/capstone/intersection/Intersection%20point%20of%20two%20lines.html
 
-		double ax = x2 - x1;
-		double ay = y2 - y1;
-		double bx = x4 - x3;
-		double by = y4 - y3;
+    private PVector getLineIntersection(Line lineA, Line lineB)
+    {
+        if(lineB.getObjectID()==objectID)
+        {
+//            System.out.println("RETURNING NULL = ");
+            return null;
+        }else
+        {
+            double x1 = lineA.getStart().x;
+            double y1 = lineA.getStart().y;
+            double x2 = lineA.getEnd().x;
+            double y2 = lineA.getEnd().y;
 
-		double denominator = ax * by - ay * bx;
+            double x3 = lineB.getStart().x;
+            double y3 = lineB.getStart().y;
+            double x4 = lineB.getEnd().x;
+            double y4 = lineB.getEnd().y;
 
-		if (denominator == 0)
-			return null;
+            double ax = x2 - x1;
+            double ay = y2 - y1;
+            double bx = x4 - x3;
+            double by = y4 - y3;
 
-		double cx = x3 - x1;
-		double cy = y3 - y1;
 
-		double t = (cx * by - cy * bx) / denominator;
-		if (t < 0 || t > 1)
-			return null;
+            double denominator = ax * by - ay * bx;
 
-		double u = (cx * ay - cy * ax) / denominator;
-		if (u < 0 || u > 1)
-			return null;
+            if (denominator == 0)
+                return null;
 
-		return new PVector(x1 + t * ax, y1 + t * ay);
-	}
+            double cx = x3 - x1;
+            double cy = y3 - y1;
+
+            double t = (cx * by - cy * bx) / denominator;
+            if (t < 0 || t > 1)
+                return null;
+
+            double u = (cx * ay - cy * ax) / denominator;
+            if (u < 0 || u > 1)
+                return null;
+
+            if (lineB.getID() == ID.PURSUER)
+            {
+//                System.out.println("ID = " + lineB.getID());
+
+            }
+            return new PVector(x1 + t * ax, y1 + t * ay);
+        }
+}
 
 }

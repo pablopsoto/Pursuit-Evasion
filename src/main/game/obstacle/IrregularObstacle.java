@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class IrregularObstacle extends GameObject
 {
-    public IrregularObstacle(int x, int y, int sides, Handler handler, ArrayList<Integer> xPoints, ArrayList<Integer> yPoints){
-        super(x,y,sides,ID.OBSTABLE,handler,xPoints,yPoints);
+    public IrregularObstacle(int x, int y, int sides, Handler handler, ArrayList<Integer> xPoints, ArrayList<Integer> yPoints,int objectID){
+        super(x,y,sides,ID.OBSTACLE,handler,xPoints,yPoints,objectID);
     }
 
     @Override
@@ -48,15 +48,17 @@ public class IrregularObstacle extends GameObject
 	}
 
 	@Override
-	public void setVelX(int x) {
+	public void setVelX(int x)
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines) {
-		// TODO Auto-generated method stub
-		
+	public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLines, List<Line> scanLines, List<Line> agentLine)
+	{
+
 	}
+
 
 }

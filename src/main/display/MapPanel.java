@@ -52,7 +52,7 @@ public class MapPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add Polygon Pressed");
-            game.getHandler().addObject(new IrregularObstacle(editor.getxPoints().get(0),editor.getyPoints().get(0),editor.getxPoints().size(),game.getHandler(),editor.getxPoints(),editor.getyPoints())
+            game.getHandler().addObject(new IrregularObstacle(editor.getxPoints().get(0),editor.getyPoints().get(0),editor.getxPoints().size(),game.getHandler(),editor.getxPoints(),editor.getyPoints(),game.getIDGenerator().getAndIncrement())
             );
 
             addPolygon.setEnabled(false);

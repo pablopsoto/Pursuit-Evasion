@@ -16,6 +16,7 @@ import java.awt.image.BufferStrategy;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Canvas implements Runnable{
 
@@ -31,14 +32,17 @@ public class Game extends Canvas implements Runnable{
     private Graphics g;
     private BufferStrategy bs;
     private Random random;
+    private AtomicInteger ID_GENERATOR = new AtomicInteger(100);
 
     public Agent getAgent()
     {
         return agent;
     }
 
-    private Agent agent;
-    
+     public Agent agent;
+     public Agent agent1;
+     public Agent agent2;
+
     ExecutorService ex = Executors.newWorkStealingPool();
 
 
@@ -53,12 +57,15 @@ public class Game extends Canvas implements Runnable{
 
         random = new Random();
 
-        for (int i = 0; i <5; i++){
-            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler));
+        for (int i = 0; i <0; i++){
+            handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler,ID_GENERATOR.getAndIncrement()));
         }
-        agent = new Agent(WIDTH/8, HEIGHT/8, 360, handler,this);
+        agent = new Agent(WIDTH/8, HEIGHT/8, 360, handler,this,ID_GENERATOR.getAndIncrement());
+        agent2 = new Agent(WIDTH/10, HEIGHT/8, 360, handler,this,ID_GENERATOR.getAndIncrement());
         handler.addObject(agent);
-        handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler));
+        handler.addObject(agent2);
+
+        handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler,ID_GENERATOR.getAndIncrement()));
 
 
 
@@ -78,7 +85,7 @@ public class Game extends Canvas implements Runnable{
         Integer[] arrayY= {0,0,getHeight(),getHeight()};
         ArrayList<Integer> leftYpoints = new ArrayList<Integer>(Arrays.asList(arrayY));
 
-        handler.addObject(new IrregularObstacle(0,0,4,handler,leftXpoints,leftYpoints));
+        handler.addObject(new IrregularObstacle(0,0,4,handler,leftXpoints,leftYpoints,ID_GENERATOR.getAndIncrement()));
 
         arrayX = new Integer[]{0, getWidth(), getWidth(), 0};
         arrayY= new Integer[]{0, 0, borderSize, borderSize};
@@ -86,7 +93,7 @@ public class Game extends Canvas implements Runnable{
         ArrayList<Integer> upXpoints = new ArrayList<Integer>(Arrays.asList(arrayX));
         ArrayList<Integer> upYpoints = new ArrayList<Integer>(Arrays.asList(arrayY));
 
-        handler.addObject(new IrregularObstacle(0,0,4,handler,upXpoints,upYpoints));
+        handler.addObject(new IrregularObstacle(0,0,4,handler,upXpoints,upYpoints,ID_GENERATOR.getAndIncrement()));
 
 
         arrayX = new Integer[]{getWidth(),getWidth()-borderSize,getWidth()-borderSize,getWidth()};
@@ -95,7 +102,7 @@ public class Game extends Canvas implements Runnable{
         ArrayList<Integer> rightXpoints = new ArrayList<Integer>(Arrays.asList(arrayX));
         ArrayList<Integer> rightYpoints = new ArrayList<Integer>(Arrays.asList(arrayY));
 
-        handler.addObject(new IrregularObstacle(0,0,4,handler,rightXpoints,rightYpoints));
+        handler.addObject(new IrregularObstacle(0,0,4,handler,rightXpoints,rightYpoints,ID_GENERATOR.getAndIncrement()));
 
         arrayX = new Integer[]{getWidth(),getWidth(),0,0};
         arrayY= new Integer[] {getHeight(),getHeight()-borderSize,getHeight()-borderSize,getHeight()};
@@ -103,7 +110,7 @@ public class Game extends Canvas implements Runnable{
         ArrayList<Integer> downXpoints = new ArrayList<Integer>(Arrays.asList(arrayX));
         ArrayList<Integer> downYpoints = new ArrayList<Integer>(Arrays.asList(arrayY));
 
-        handler.addObject(new IrregularObstacle(0,0,4,handler,downXpoints,downYpoints));
+        handler.addObject(new IrregularObstacle(0,0,4,handler,downXpoints,downYpoints,ID_GENERATOR.getAndIncrement()));
 
     }
     
@@ -123,7 +130,7 @@ public class Game extends Canvas implements Runnable{
             lastTime = now;
             while (delta >= 1){
                 tick();
-                render();  
+                render();
                 delta--;
             }
 
@@ -186,5 +193,10 @@ public class Game extends Canvas implements Runnable{
     public Handler getHandler()
     {
         return handler;
+    }
+
+    public AtomicInteger getIDGenerator()
+    {
+        return ID_GENERATOR;
     }
 }
