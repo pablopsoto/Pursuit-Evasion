@@ -23,7 +23,7 @@ public abstract class GameObject
     protected Polygon polygon = null;
     protected Handler objectHandler;
     protected Handler agentHandler;
-
+    protected int velX,velY;
 
     private int objectID;
 
@@ -104,27 +104,31 @@ public abstract class GameObject
      */
     public void tick()
     {
-        getDirection();
+//        getDirection();
         applyRotaion();
+        applyVelocity();
+        location.x+=velX;
+        location.y+=velY;
 
-
-        polygon.translate(posX, posY);
+        polygon.translate(velX, velY);
         polygon = rotatedPolygon(rotation, polygon);
 
 
         if (collided(objectHandler))
         {
             System.out.println("COLIDED");
-
-            setX(getX()-1);
-            setY(getY()-1);
-            polygon.translate(-1,-1);
+            polygon.translate(-velX,-velY);
+            location.x-=velX;
+            location.y-=velY;
+//            setX(getX()-1);
+//            setY(getY()-1);
+//            polygon.translate(-1,-1);
 
         } else
         {
             // System.out.println("NOT COLIDED");
-        	setX(getX()+getVelX());
-       	   	setY(getY()+getVelY());
+//        	setX(getX()+getVelX());
+//       	   	setY(getY()+getVelY());
         }
     }
 
@@ -222,7 +226,7 @@ public abstract class GameObject
 
 
     public int getX(){
-    	return x;
+    	return (int) location.x;
     }
 
     public void setX(int x){
@@ -234,12 +238,13 @@ public abstract class GameObject
     }
 
     public int getY(){
-    	return y;
+    	return (int) location.y;
     }
 
     public abstract void getDirection();
 
     public abstract void applyRotaion();
+    public abstract void applyVelocity();
 
     public abstract int getVelY();
     public abstract void setVelY(int y);

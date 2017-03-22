@@ -29,6 +29,12 @@ public class Obstacle extends GameObject {
     }
 
 	@Override
+	public void applyVelocity()
+	{
+
+	}
+
+	@Override
 	public int getVelY() {
 		// TODO Auto-generated method stub
 		return 0;
