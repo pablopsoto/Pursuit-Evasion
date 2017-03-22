@@ -51,10 +51,13 @@ public abstract class GameObject
                 PVector end = new PVector(xPoints[i], yPoints[i]);
                 objectHandler.getSceneLines().add(new Line(start,end));
             }
+
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
-
-
+        if(id != ID.EVADOR && id!=ID.PURSUER){
+        PVector start = new PVector(xPoints[sides-1], yPoints[sides-1]);
+        PVector end = new PVector(xPoints[0], yPoints[0]);
+        objectHandler.getSceneLines().add(new Line(start,end));}
         polygon = new Polygon(xPoints, yPoints, sides);
 
     }
@@ -82,6 +85,10 @@ public abstract class GameObject
             }
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
+        if(id != ID.EVADOR && id!=ID.PURSUER){
+        PVector start = new PVector(xPointsInt[sides-1], yPointsInt[sides-1]);
+        PVector end = new PVector(xPointsInt[0], yPointsInt[0]);
+        objectHandler.getSceneLines().add(new Line(start,end));}
 
         polygon = new Polygon(xPointsInt, yPointsInt, sides);
     }

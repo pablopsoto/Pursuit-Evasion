@@ -40,6 +40,7 @@ public class RegularPolygonPanel extends JPanel
         this.add(RegularPolygonEditor);
         this.add(addRegularPolygon);
 
+
         addRegularPolygon.setEnabled(false);
 
         addRegularPolygon.addActionListener(new AddActionListener());
