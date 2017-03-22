@@ -40,7 +40,6 @@ public class Game extends Canvas implements Runnable{
     }
 
      public Agent agent;
-     public Agent agent1;
      public Agent agent2;
 
     ExecutorService ex = Executors.newWorkStealingPool();
@@ -60,8 +59,8 @@ public class Game extends Canvas implements Runnable{
         for (int i = 0; i <0; i++){
             handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler,ID_GENERATOR.getAndIncrement()));
         }
-        agent = new Agent(WIDTH/8, HEIGHT/8, 360, handler,this,ID_GENERATOR.getAndIncrement());
-        agent2 = new Agent(WIDTH/10, HEIGHT/8, 360, handler,this,ID_GENERATOR.getAndIncrement());
+        agent = new Agent(WIDTH/8, HEIGHT/2, 360, handler,this,ID_GENERATOR.getAndIncrement());
+        agent2 = new Agent(WIDTH/2, HEIGHT/2, 360, handler,this,ID_GENERATOR.getAndIncrement());
         handler.addObject(agent);
         handler.addObject(agent2);
 
