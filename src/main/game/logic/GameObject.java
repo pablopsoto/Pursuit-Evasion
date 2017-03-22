@@ -105,13 +105,13 @@ public abstract class GameObject {
         } else {
             // System.out.println("NOT COLIDED");
         }
+        applyRotaion();
+        polygon = rotatedPolygon(rotation, polygon);
         if (collided(handler)) {
             polygon = rotatedPolygon(-rotation, polygon);
         } else {
-            polygon = rotatedPolygon(rotation, polygon);
+
         }
-        applyRotaion();
-        //polygon = rotatedPolygon(rotation, polygon);
 
     }
 
