@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
 public class RegularPolygonPanel extends JPanel
 {
     private  Game game;
-    private JTextField sidesTextField = new JTextField("4");
-    private JTextField sizeTextField = new JTextField("10");
+    private JTextField sidesTextField = new JTextField("7");
+    private JTextField sizeTextField = new JTextField("20");
     JLabel sidesLabel = new JLabel("Sides = ");
     JLabel sizeLabel = new JLabel("Size = ");
 

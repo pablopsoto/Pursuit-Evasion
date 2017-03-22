@@ -42,7 +42,6 @@ public class Handler implements java.io.Serializable{
 
 
         }
-        System.out.println(agents);
         for (Agent a : agents)
         {
             a.visionStart(g, a.getX(), a.getY(), sceneLines, scanLines, agentLines);

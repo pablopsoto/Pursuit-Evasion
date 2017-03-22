@@ -25,11 +25,12 @@ public class Agent extends GameObject
 
     double angle = 0;
     private int stepCounter = 0;
+    private Color color;
 
 
     public Agent(int x, int y, int sides, Handler handler,ID id,  Game game, int objectID)
     {
-        super(x, y, sides, 10, id, handler, objectID);
+        super(x, y, sides, 15, id, handler, objectID);
 
     }
 
@@ -46,7 +47,7 @@ public class Agent extends GameObject
         List<PVector> points = algorithm.getIntersectionPoints(scanLines, sceneLines);
         int count = 0;
         Graphics2D g2 = (Graphics2D) g;
-        g.setColor(Color.ORANGE);
+        g.setColor(color);
         g2.setStroke(new BasicStroke(1));
 //        System.out.println("Points " + points);
         for (PVector point : points)
@@ -84,26 +85,22 @@ public class Agent extends GameObject
     @Override
     public void applyRotaion()
     {
-        if (stepCounter == 60)
+//        if (stepCounter == 30)
         {
             if (Math.random() < 0.5)
             {
-                angle += 0.1;
+                angle += (double) 0.0027778;
             } else
             {
-                angle -= 0.1;
+                angle -= (double) 0.002778;
             }
-        } else
-        {
-            stepCounter++;
         }
-
         }
 
     public void applyVelocites(int x, int y)
     {
 
-        if (stepCounter == 60)
+        if (stepCounter == 30)
         {
             Random r = new Random();
             velX = r.nextInt(3) - 1;
@@ -158,5 +155,10 @@ public class Agent extends GameObject
     public void setAngle(double angle)
     {
         this.angle = angle;
+    }
+
+    public void setColor(Color color)
+    {
+        this.color = color;
     }
 }

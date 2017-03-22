@@ -217,12 +217,12 @@ public class Algorithm implements java.io.Serializable
 
             if (lineB.getID() == ID.PURSUER && agentID == ID.EVADER)
             {
-                System.out.println("RUN AWAY!!!!");
+//                System.out.println("RUN AWAY!!!!");
 //                System.out.println("ID = " + lineB.getID());
             }
             if (lineB.getID() == ID.EVADER && agentID == ID.PURSUER)
             {
-                System.out.println("GOT CAUGHT");
+//                System.out.println("GOT CAUGHT");
 //                System.out.println("ID = " + lineB.getID());
             }
             return new PVector(x1 + t * ax, y1 + t * ay);

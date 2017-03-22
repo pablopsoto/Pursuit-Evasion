@@ -44,6 +44,7 @@ public abstract class GameObject implements java.io.Serializable
         this.y = y;
         this.objectID=objectID;
         System.out.println("OBJECTID = " + objectID);
+        System.out.println("ID " + id);
         int[] xPoints = new int[sides];
         int[] yPoints = new int[sides];
 
@@ -147,6 +148,7 @@ public abstract class GameObject implements java.io.Serializable
         if (id == ID.EVADER)
         {
             g.setColor(Color.RED);
+            renderPoints(polygon.xpoints,polygon.ypoints);
         } else if (id == ID.PURSUER)
         {
             g.setColor(Color.GREEN);
