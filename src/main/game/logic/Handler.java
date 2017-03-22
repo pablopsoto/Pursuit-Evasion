@@ -43,7 +43,6 @@ public class Handler
 
 
         }
-        System.out.println(agents);
         for (Agent a : agents)
         {
             a.visionStart(g, a.getX(), a.getY(), sceneLines, scanLines, agentLines);

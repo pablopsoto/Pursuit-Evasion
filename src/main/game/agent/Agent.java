@@ -84,26 +84,22 @@ public class Agent extends GameObject
     @Override
     public void applyRotaion()
     {
-        if (stepCounter == 60)
+//        if (stepCounter == 30)
         {
             if (Math.random() < 0.5)
             {
-                angle += 0.1;
+                angle += (double) 0.0027778;
             } else
             {
-                angle -= 0.1;
+                angle -= (double) 0.002778;
             }
-        } else
-        {
-            stepCounter++;
         }
-
         }
 
     public void applyVelocites(int x, int y)
     {
 
-        if (stepCounter == 60)
+        if (stepCounter == 30)
         {
             Random r = new Random();
             velX = r.nextInt(3) - 1;

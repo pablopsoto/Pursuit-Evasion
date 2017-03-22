@@ -1,5 +1,6 @@
 package main.mapEditor;
 
+import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,10 +9,12 @@ import java.util.ArrayList;
 /**
  * Created by Jeroen on 11/03/2017.
  */
-public class MapEditor
+public class MapEditor extends MouseInputAdapter
 {
     ArrayList<Integer> xPoints = new ArrayList<Integer>();
     ArrayList<Integer> yPoints = new ArrayList<Integer>();
+    int currentX;
+    int currentY;
 
     public MapEditor(Canvas game)
     {
@@ -65,6 +68,9 @@ public class MapEditor
         @Override
         public void mouseReleased(MouseEvent e)
         {
+            currentX = e.getX();
+            currentY = e.getY();
+            System.out.println("X = " + currentX + " Y = " + currentY);
 
         }
 
