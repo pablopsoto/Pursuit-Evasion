@@ -16,6 +16,7 @@ public class Handler {
     protected List<Line> sceneLines = new ArrayList<>();
     protected List<Line> scanLines = new ArrayList<>();
     protected List<Line> agentLines = new ArrayList<>();
+    protected List<Agent> agents = new ArrayList<>();
 
 
     public synchronized void tick(){
@@ -34,12 +35,15 @@ public class Handler {
 
             if (o.getClass() == Agent.class)
             {
-                o.visionStart(g, o.getX(), o.getY(), sceneLines, scanLines, agentLines);
-
+                agents.add((Agent)o);
             }
 
 
         }
+        for(Agent a: agents){
+        a.visionStart(g, a.getX(), a.getY(), sceneLines, scanLines, agentLines);
+        }
+        agents.clear();
 
 //      startX+=0.1;
     }

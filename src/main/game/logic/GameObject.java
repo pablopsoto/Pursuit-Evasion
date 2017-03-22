@@ -154,7 +154,6 @@ public abstract class GameObject
     }
     public void renderPoints(int[] xPoints,int[] yPoints)
     {
-
         for (int i = 1; i < xPoints.length; i++)
         {
             PVector start = new PVector(xPoints[i-1], yPoints[i-1]);

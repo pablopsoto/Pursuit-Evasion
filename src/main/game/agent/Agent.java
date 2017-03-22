@@ -28,14 +28,14 @@ public class Agent extends GameObject{
 
 
 
-    public Agent(int x, int y, int sides, Handler handler, Game game, int objectID) {
-        super(x, y, sides, 10, ID.PURSUER, handler,objectID);
+    public Agent(int x, int y, int sides, Handler handler,ID id, Game game, int objectID) {
+        super(x, y, sides, 10, id, handler,objectID);
 
     }
     private Algorithm algorithm = new Algorithm();
     public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLinesOld, List<Line> scanLines, List<Line> agentLines){
-        scanLines = this.algorithm.createScanLines(startX,startY,angle, this.getObjectID());
-        List<Line> sceneLines= new ArrayList<Line>();
+        scanLines = this.algorithm.createScanLines(startX,startY,angle,this.getObjectID());
+        List<Line> sceneLines= new ArrayList<>();
         sceneLines.addAll(sceneLinesOld);
         sceneLines.addAll(agentLines);
 
