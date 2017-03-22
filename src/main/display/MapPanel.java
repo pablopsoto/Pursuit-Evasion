@@ -20,7 +20,9 @@ public class MapPanel extends JPanel
     MapEditor editor;
     JButton polygonButton = new JButton("Polygon editor");
     JButton addPolygon = new JButton("Add polygon");
+    JLabel irXY = new JLabel("NO MOUSE INPUT");
         public MapPanel(Game game){
+            this.add(irXY);
             this.add(polygonButton);
             this.add(addPolygon);
             addPolygon.setEnabled(false);
