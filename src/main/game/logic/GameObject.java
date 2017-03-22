@@ -73,7 +73,7 @@ public abstract class GameObject {
         for(int i = 0;i<yPoints.size();i++){
             yPointsInt[i]=yPoints.get(i);
         }
-        fullPolygon = new Polygon(new int[sides], new int[sides], 0);
+        fullPolygon = new Polygon(new int[sides], new int[sides], 4*360);
         pointer  = new int[sides];
         polygon = new Polygon(xPointsInt,yPointsInt,sides);
     }
@@ -90,23 +90,29 @@ public abstract class GameObject {
     public void tick(){
         applyVelocities();
 
-        polygon.translate(velX, velY);
-        fullPolygon.translate(velX, velY);
-
         location.x += velX;
         location.y += velY;
+
+        polygon.translate(velX, velY);
+        fullPolygon.translate(velX, velY);
 
         if (collided(handler)) {
             //System.out.println("COLIDED");
             polygon.translate(-velX, -velY);
+            fullPolygon.translate(-velX, -velY);
             location.x -= velX;
             location.y -= velY;
         } else {
             // System.out.println("NOT COLIDED");
         }
-
+        if (collided(handler)) {
+            polygon = rotatedPolygon(-rotation, polygon);
+        } else {
+            polygon = rotatedPolygon(rotation, polygon);
+        }
         applyRotaion();
-        polygon = rotatedPolygon(rotation, polygon);
+        //polygon = rotatedPolygon(rotation, polygon);
+
     }
 
     /**
@@ -171,11 +177,11 @@ public abstract class GameObject {
                 }
             }
 
-            xs[i] = allX[pointer[i]];
-            ys[i] = allY[pointer[i]];
+           // xs[i] = allX[pointer[i]];
+            //ys[i] = allY[pointer[i]];
+            xs[i] = fullPolygon.xpoints[pointer[i]];
+            ys[i] = fullPolygon.ypoints[pointer[i]];
         }
-
-
 
         Polygon p = new Polygon(xs, ys, xs.length);
 

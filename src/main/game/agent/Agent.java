@@ -16,13 +16,12 @@ public class Agent extends GameObject{
 
     @Override
     public void applyVelocities() {
-        applyVelocites(0, 0);
-        for (int j=0;j<10;j++) {
+        applyVelocites(1, 0);
             for (int i = 0; i < this.getPolygon().xpoints.length; i++) {
                 System.out.println("Point"+ i +" : " + "( " + this.getPolygon().xpoints[i] + ", " + this.getPolygon().ypoints[i] +")");
             }
             System.out.println("Centre: " + this.getLocation());
-        }
+
     }
 
     @Override
