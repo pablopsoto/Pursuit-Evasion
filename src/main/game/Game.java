@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Canvas implements Runnable{
 
-    public final int WIDTH = 800;
-    public final int HEIGHT = WIDTH/ 12 * 9;
+    public final int WIDTH = 1200;
+    public final int HEIGHT = WIDTH/ 12 * 7;
 
     private Thread thread;
     private boolean running = false;
@@ -61,15 +61,12 @@ public class Game extends Canvas implements Runnable{
         for (int i = 0; i <0; i++){
             handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler,ID_GENERATOR.getAndIncrement()));
         }
-        //agent = new Evader(WIDTH/2, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
-        //agent2 = new Pursuer(WIDTH/8, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
-        agent = new Evader(230, 230, 36, handler,this,ID_GENERATOR.getAndIncrement());
-        agent2 = new Pursuer(200, 200, 36, handler,this,ID_GENERATOR.getAndIncrement());
-        /*handler.addObject(new Pursuer(WIDTH/8, HEIGHT/4, 36, handler,this,ID_GENERATOR.getAndIncrement()));
+        agent = new Evader(WIDTH/2, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
+        agent2 = new Pursuer(WIDTH/8, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
+        handler.addObject(new Pursuer(WIDTH/8, HEIGHT/4, 36, handler,this,ID_GENERATOR.getAndIncrement()));
         handler.addObject(new Pursuer(WIDTH/3, HEIGHT/4, 36, handler,this,ID_GENERATOR.getAndIncrement()));
         handler.addObject( new Evader(WIDTH/4, HEIGHT/5, 36, handler,this,ID_GENERATOR.getAndIncrement()));
         handler.addObject( new Evader(WIDTH/7, HEIGHT/5, 36, handler,this,ID_GENERATOR.getAndIncrement()));
-        */
         handler.addObject(agent);
         handler.addObject(agent2);
 
@@ -149,7 +146,7 @@ public class Game extends Canvas implements Runnable{
 
             if(System.currentTimeMillis()-timer >1000){
                 timer += 1000;
-                System.out.printf("FPS: %d \n", frames);
+                //System.out.printf("FPS: %d \n", frames);
                 frames = 0;
             }
 
