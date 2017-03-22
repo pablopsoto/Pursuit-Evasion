@@ -1,6 +1,5 @@
 package main.game.logic;
 
-import main.vision.Algorithm;
 import main.vision.Line;
 import main.vision.PVector;
 import main.util.Location;
@@ -9,7 +8,6 @@ import java.awt.*;
 import java.awt.geom.Area;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class GameObject
 {
@@ -82,7 +80,7 @@ public abstract class GameObject
         {
             xPointsInt[i] = xPoints.get(i);
             yPointsInt[i] = yPoints.get(i);
-            if (i > 0 && id != ID.EVADOR && id!=ID.PURSUER)
+            if (i > 0 && id != ID.EVADER && id!=ID.PURSUER)
 //            if (i > 0 )
             {
                 PVector start = new PVector(xPoints.get(i - 1), yPoints.get(i - 1));
@@ -91,7 +89,7 @@ public abstract class GameObject
             }
 //            System.out.println("Scenelines " + handler.getSceneLines());
         }
-        if(id != ID.EVADOR && id!=ID.PURSUER){
+        if(id != ID.EVADER && id!=ID.PURSUER){
         PVector start = new PVector(xPointsInt[sides-1], yPointsInt[sides-1]);
         PVector end = new PVector(xPointsInt[0], yPointsInt[0]);
         objectHandler.getSceneLines().add(new Line(start,end,id));}
@@ -116,7 +114,6 @@ public abstract class GameObject
 
         if (collided(objectHandler))
         {
-            System.out.println("COLIDED");
             polygon.translate(-velX,-velY);
             location.x-=velX;
             location.y-=velY;
@@ -138,12 +135,12 @@ public abstract class GameObject
     public void render(Graphics g)
     {
 
-        if (id == ID.EVADOR)
-        {
-            g.setColor(Color.CYAN);
-        } else if (id == ID.PURSUER)
+        if (id == ID.EVADER)
         {
             g.setColor(Color.RED);
+        } else if (id == ID.PURSUER)
+        {
+            g.setColor(Color.GREEN);
             renderPoints(polygon.xpoints,polygon.ypoints);
 
         } else if (id == ID.OBSTACLE)

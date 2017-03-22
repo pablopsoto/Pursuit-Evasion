@@ -3,6 +3,8 @@ package main.game;
 
 import main.display.Window;
 import main.game.agent.Agent;
+import main.game.agent.Evader;
+import main.game.agent.Pursuer;
 import main.game.logic.GameObject;
 import main.game.logic.Handler;
 import main.game.logic.KeyIn;
@@ -59,8 +61,8 @@ public class Game extends Canvas implements Runnable{
         for (int i = 0; i <0; i++){
             handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler,ID_GENERATOR.getAndIncrement()));
         }
-        agent = new Agent(WIDTH/8, HEIGHT/2, 360, handler,this,ID_GENERATOR.getAndIncrement());
-        agent2 = new Agent(WIDTH/2, HEIGHT/2, 360, handler,this,ID_GENERATOR.getAndIncrement());
+        agent = new Pursuer(WIDTH/2, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
+        agent2 = new Pursuer(WIDTH/8, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
         handler.addObject(agent);
         handler.addObject(agent2);
 

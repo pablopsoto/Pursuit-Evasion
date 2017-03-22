@@ -62,7 +62,7 @@ public class Settings {
 	private IntegerProperty roomIterations = new SimpleIntegerProperty( 100);
 	private BooleanProperty environmentVisible = new SimpleBooleanProperty(true);
 	private BooleanProperty userVisible = new SimpleBooleanProperty(true);
-	private DoubleProperty scanLineLength = new SimpleDoubleProperty(50);
+	private DoubleProperty scanLineLength = new SimpleDoubleProperty(300);
 	private BooleanProperty drawPoints = new SimpleBooleanProperty( true);
 	private BooleanProperty drawShape = new SimpleBooleanProperty( true);
 	private BooleanProperty gradientShapeFill = new SimpleBooleanProperty(false);

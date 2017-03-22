@@ -27,9 +27,9 @@ public class Agent extends GameObject
     private int stepCounter = 0;
 
 
-    public Agent(int x, int y, int sides, Handler handler, Game game, int objectID)
+    public Agent(int x, int y, int sides, Handler handler,ID id,  Game game, int objectID)
     {
-        super(x, y, sides, 10, ID.PURSUER, handler, objectID);
+        super(x, y, sides, 10, id, handler, objectID);
 
     }
 
@@ -38,7 +38,7 @@ public class Agent extends GameObject
     public void visionStart(Graphics g, double startX, double startY, List<Line> sceneLinesOld, List<Line> scanLines,
                             List<Line> agentLines)
     {
-        scanLines = this.algorithm.createScanLines(startX, startY, angle, this.getObjectID());
+        scanLines = this.algorithm.createScanLines(startX, startY, angle, this.getObjectID(),id);
         List<Line> sceneLines = new ArrayList<>();
         sceneLines.addAll(sceneLinesOld);
         sceneLines.addAll(agentLines);
@@ -46,8 +46,8 @@ public class Agent extends GameObject
         List<PVector> points = algorithm.getIntersectionPoints(scanLines, sceneLines);
         int count = 0;
         Graphics2D g2 = (Graphics2D) g;
-        g.setColor(Color.BLUE);
-        g2.setStroke(new BasicStroke(3));
+        g.setColor(Color.ORANGE);
+        g2.setStroke(new BasicStroke(1));
 //        System.out.println("Points " + points);
         for (PVector point : points)
         {
@@ -84,14 +84,14 @@ public class Agent extends GameObject
     @Override
     public void applyRotaion()
     {
-        if (stepCounter == 30)
+        if (stepCounter == 60)
         {
             if (Math.random() < 0.5)
             {
-                angle += 0.05;
+                angle += 0.1;
             } else
             {
-                angle -= 0.05;
+                angle -= 0.1;
             }
         } else
         {
@@ -103,7 +103,7 @@ public class Agent extends GameObject
     public void applyVelocites(int x, int y)
     {
 
-        if (stepCounter == 30)
+        if (stepCounter == 60)
         {
             Random r = new Random();
             velX = r.nextInt(3) - 1;
