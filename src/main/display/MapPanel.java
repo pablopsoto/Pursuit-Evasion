@@ -9,6 +9,7 @@ import main.game.logic.Handler;
 import main.game.obstacle.IrregularObstacle;
 import main.mapEditor.EditorActionListener;
 import main.mapEditor.MapEditor;
+import main.mapEditor.regularEditor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,7 @@ public class MapPanel extends JPanel
     Handler newHandler = null;
     Game game;
     MapEditor editor;
+    regularEditor editorPersuerEvador;
     JButton polygonButton = new JButton("Polygon editor");
     JButton addPolygon = new JButton("Add polygon");
 
@@ -66,6 +68,7 @@ public class MapPanel extends JPanel
 
             this.game = game;
             editor = new MapEditor(game);
+            editorPersuerEvador = new regularEditor(game);
 
             //game.render();
         }
@@ -93,7 +96,7 @@ public class MapPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add Evader Button Pressed");
-            Agent agent = new Evader(r.nextInt(480)+20, r.nextInt(480)+20, 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
+            Agent agent = new Evader(editorPersuerEvador.getX(), editorPersuerEvador.getY(), 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
             game.getHandler().addObject(agent);
 
             //game.render();
@@ -106,7 +109,7 @@ public class MapPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             System.out.println("Add Pursuer Button Pressed");
-            Agent agent = new Pursuer(r.nextInt(480)+20, r.nextInt(480)+20, 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
+            Agent agent = new Pursuer(editorPersuerEvador.getX(), editorPersuerEvador.getY(), 20, game.getHandler(),game, game.getIDGenerator().getAndIncrement());
             game.getHandler().addObject(agent);
 
             //game.render();

@@ -61,7 +61,7 @@ public class Game extends Canvas implements Runnable{
         for (int i = 0; i <0; i++){
             handler.addObject(new Obstacle(random.nextInt(WIDTH)/2, random.nextInt(HEIGHT)/2,4,30, handler,ID_GENERATOR.getAndIncrement()));
         }
-        agent = new Evader(WIDTH/2, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
+       /* agent = new Evader(WIDTH/2, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
         agent2 = new Pursuer(WIDTH/8, HEIGHT/2, 36, handler,this,ID_GENERATOR.getAndIncrement());
         handler.addObject(new Pursuer(WIDTH/8, HEIGHT/4, 20, handler,this,ID_GENERATOR.getAndIncrement()));
         handler.addObject(new Pursuer(WIDTH/3, HEIGHT/4, 20, handler,this,ID_GENERATOR.getAndIncrement()));
@@ -69,8 +69,8 @@ public class Game extends Canvas implements Runnable{
         handler.addObject( new Evader(WIDTH/7, HEIGHT/5, 20, handler,this,ID_GENERATOR.getAndIncrement()));
         handler.addObject(agent);
         handler.addObject(agent2);
-
-        handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler,ID_GENERATOR.getAndIncrement()));
+*/
+//        handler.addObject(new Obstacle(500,HEIGHT/2-10, random.nextInt(8) +3,30, handler,ID_GENERATOR.getAndIncrement()));
 
 
 
