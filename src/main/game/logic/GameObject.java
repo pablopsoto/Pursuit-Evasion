@@ -22,7 +22,7 @@ public abstract class GameObject {
     protected Polygon fullPolygon;
     protected Handler handler;
 
-    private int pointer;
+    private int[] pointer;
     private double shift;
 
     public GameObject(int x, int y, int sides, int radius,ID id, Handler handler){
@@ -46,14 +46,13 @@ public abstract class GameObject {
         fullPolygon = new Polygon(allX, allY, allX.length);
 
         shift = 1440/ sides;
+        pointer = new int[sides];
 
         for (int i = 0; i < sides; i++){
-
+            pointer[i] = (int)shift * i;
             xPoints[i] = allX[(int)shift * i];
             yPoints[i] = allY[(int)shift * i];
         }
-
-        pointer = 0;
 
         polygon = new Polygon(xPoints, yPoints, sides);
 
@@ -66,11 +65,16 @@ public abstract class GameObject {
 
         int[] xPointsInt = new int[sides];
         int[] yPointsInt = new int[sides];
-        for(int i = 0;i<xPoints.size();i++){
-            xPointsInt[i]=xPoints.get(i);}
-        for(int i = 0;i<yPoints.size();i++){
-            yPointsInt[i]=yPoints.get(i);}
 
+        for(int i = 0;i<xPoints.size();i++){
+            xPointsInt[i]=xPoints.get(i);
+        }
+
+        for(int i = 0;i<yPoints.size();i++){
+            yPointsInt[i]=yPoints.get(i);
+        }
+        fullPolygon = new Polygon(new int[sides], new int[sides], 0);
+        pointer  = new int[sides];
         polygon = new Polygon(xPointsInt,yPointsInt,sides);
     }
 
@@ -145,27 +149,33 @@ public abstract class GameObject {
 
     public Polygon rotatedPolygon(double theta, Polygon polygon){
 
-        //TODO: use allX and allY locations to do ratation on the polygon
-        //TODO: feel free to re write this part
+        /*TODO: use allX and allY locations to do rotation on the polygon
+        feel free to re write this part*/
 
         int[] xs = polygon.xpoints;
         int[] ys = polygon.ypoints;
 
-        if(pointer >= shift-1 && theta > 0){
-            for (int i = 0; i < sides; i++){
-                xs[i] = allX[(int)shift * i];
-                ys[i] = allY[(int)shift * i];
-            }
-            pointer = 0;
-        } else if(pointer == 0 && theta<0){
-            for (int i = sides - 1; i < 0; i--){
-                xs[sides - i -1] = allX[(int)shift * i];
-                ys[sides - i -1] = allY[(int)shift * i];
-            }
-            pointer = (int) shift - 1;
-        } else if(theta == 1){
+        for(int i = 0; i < xs.length; i++){
 
+            if(theta == 1){
+                if(pointer[i] == allX.length - 1){
+                    pointer[i] = 0;
+                } else {
+                    pointer[i]++;
+                }
+            } else if( theta == -1){
+                if(pointer[i] == 0){
+                    pointer[i] = allX.length - 1;
+                } else {
+                    pointer[i]--;
+                }
+            }
+
+            xs[i] = allX[pointer[i]];
+            ys[i] = allY[pointer[i]];
         }
+
+
 
         Polygon p = new Polygon(xs, ys, xs.length);
 

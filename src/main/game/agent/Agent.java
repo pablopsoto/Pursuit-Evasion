@@ -27,7 +27,7 @@ public class Agent extends GameObject{
 
     @Override
     public void applyRotaion() {
-       rotation = Math.PI/45;
+       rotation =1;
     }
 
     public void applyVelocites(int x, int y){
