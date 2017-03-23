@@ -201,7 +201,7 @@ public class Panel extends JPanel
         {
             System.out.println("Start Button Pressed");
 //            game.start();
-            game.getHandler().switchMovement();
+            game.getHandler().startMovement();
             start.setEnabled(false);
             stop.setEnabled(true);
         }
@@ -214,7 +214,7 @@ public class Panel extends JPanel
         {
         /*    System.out.println("Stop Button Pressed");
             game.stop();*/
-            game.getHandler().switchMovement();
+            game.getHandler().stopMovement();
             start.setEnabled(true);
             stop.setEnabled(false);
         }
@@ -318,7 +318,9 @@ public class Panel extends JPanel
                 c.printStackTrace();
                 return;
             }
+
             game.start();
+            game.getHandler().stopMovement();
         }
     }
 

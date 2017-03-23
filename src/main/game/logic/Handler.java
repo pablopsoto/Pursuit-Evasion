@@ -99,8 +99,11 @@ public class Handler implements java.io.Serializable{
         }
     }
 
-    public void switchMovement(){
-        movement = !movement;
+    public void startMovement(){
+       if(!movement)movement=true;
+    }
+    public void stopMovement(){
+        if(movement)movement=false;
     }
 
     public boolean getMovement()
