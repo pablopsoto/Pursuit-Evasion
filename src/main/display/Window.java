@@ -23,13 +23,15 @@ public class Window extends Canvas {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.add(game,BorderLayout.CENTER);
-        frame.add(new MapPanel(game), BorderLayout.SOUTH);
-        frame.add(new RegularPolygonPanel(game), BorderLayout.EAST);
-        frame.addKeyListener(new KeyIn(game));
+//        frame.add(new MapPanel(game), BorderLayout.SOUTH);
+        frame.add(new Panel(game), BorderLayout.EAST);
+//        frame.add(new RegularPolygonPanel(game), BorderLayout.EAST);
+//        frame.addKeyListener(new KeyIn(game));
 
         frame.setVisible(true);
         frame.setFocusable(true);
 
+        game.start();
     }
 
 }

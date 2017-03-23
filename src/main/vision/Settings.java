@@ -58,4 +58,8 @@ public class Settings
     }
 
 
+    public void setScanLineLength(int scanLineLength)
+    {
+        this.scanLineLength = new SimpleDoubleProperty(scanLineLength);
+    }
 }

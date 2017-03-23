@@ -29,6 +29,7 @@ public class Agent extends GameObject
     private double dAngle;
 
 
+
     public Agent(int x, int y, int sides, Handler handler,ID id,  Game game, int objectID)
     {
         super(x, y, sides, 15, id, handler, objectID);
@@ -85,7 +86,7 @@ public class Agent extends GameObject
 
     @Override
     public void applyRotaion() {
-
+        if(super.objectHandler.getMovement()){
         if (stepCounter == 30 ) {
             if (Math.random() < 0.5) {
                 dAngle = (double) 0.0027778;
@@ -96,11 +97,12 @@ public class Agent extends GameObject
 
         angle += dAngle;
     }
+    }
 
 
     public void applyVelocites(int x, int y)
     {
-
+        if(super.objectHandler.getMovement()){
         if (stepCounter == 30)
         {
             Random r = new Random();
@@ -110,6 +112,10 @@ public class Agent extends GameObject
         } else
         {
             stepCounter++;
+        }
+
+            }else {
+            velX=0;velY=0;
         }
     }
 

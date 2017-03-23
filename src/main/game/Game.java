@@ -26,6 +26,12 @@ public class Game extends Canvas implements Runnable{
     public final int HEIGHT = WIDTH/ 12 * 7;
 
     private Thread thread;
+
+    public boolean isRunning()
+    {
+        return running;
+    }
+
     private boolean running = false;
 
     private Handler handler;

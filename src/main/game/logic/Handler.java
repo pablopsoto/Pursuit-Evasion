@@ -18,6 +18,7 @@ public class Handler implements java.io.Serializable{
     protected List<Line> agentLines = new ArrayList<>();
     protected List<Agent> agents = new ArrayList<>();
 
+    boolean movement = false;
 
     public synchronized void tick()
     {
@@ -96,5 +97,14 @@ public class Handler implements java.io.Serializable{
             if(objects.get(i).getObjectID()==objectID)objects.remove(i);
 
         }
+    }
+
+    public void switchMovement(){
+        movement = !movement;
+    }
+
+    public boolean getMovement()
+    {
+        return movement;
     }
 }
